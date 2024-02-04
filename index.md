@@ -2,7 +2,7 @@
 
 _Data Analyst / Engineer_ <br>
 
-[Email](mailto:butriman@icloud.com) / [LinkedIn](www.linkedin.com/in/vbutrimenko) / [Telegram](https://t.me/butriman)
+[Email](mailto:butriman@icloud.com) / [LinkedIn](https://linkedin.com/in/vbutrimenko) / [Telegram](https://t.me/butriman)
 
 ## 👨🏻‍💻 Working Experience
 
