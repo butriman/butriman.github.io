@@ -10,42 +10,44 @@ _Data Analyst / Engineer_ <br>
 
 #### Key Qualifications & Responsibilities:
 - **Analysis**:
-  - Creating coding prototypes (SQL scripts)
-  - Preparing technical specifications/documentation
-  - Resolving incidents/problems
-  - Conducting demonstrational meetings with business consumers
-  - Handling new tasks and regular improvements of DWH DB and its layers (ODS, detail layer, and datamarts)
-- **Development**:
-  - Coding workflows/sessions/maps in Informatica PC
-  - developing packages/procedures/functions in Oracle PL/SQL
-- **Tasks evaluation**:
   - Conducting preliminary analysis of business requirements
   - Exploring possibilities for task realization under current DWH standards and conditions
   - Advocating chosen approaches within the DWH team
-- **Maintenance and support**: Overseeing task maintenance from business requirements clarification to UAT finish and collaborating with business consumers, IT managers, developers, and QA engineers
+  - Preparing technical specifications/documentation
+  - Conducting demonstrational meetings with business consumers
+  - Handling new tasks and regular improvements of DWH DB, its layers (Operational Data Store, detail layer, and datamarts) and the Anti-Fraud & Anti-Money-Laundering (AF&AML) system
+  - Contributing significantly to reviewing architectural and business aspects of changes in the microservice layer interacting with the AF&AML system
+- **Development**:
+  - Creating coding prototypes (SQL scripts)
+  - Coding workflows/sessions/maps in Informatica PC
+  - Developing packages/procedures/functions in Oracle PL/SQL
+  - Creating project workflows using SAS ESP Studio Management
+- **Maintenance and support**:
+  - Resolving incidents/problems as part of third-line support, where our team took responsibility for incident resolution in the DWH and AF&AML (24/7 mission-critical) systems
+  - Overseeing task maintenance from business requirements clarification to UAT finish and collaborating with business consumers, IT managers, developers, and QA engineers
 - **Automation**: Executing various tasks aimed at simplifying the working process
 - **Mentoring**: Guiding and mentoring a team of 6 employees, facilitating their integration into the working flow
 - **Accounting**: Recording time and tasks progress in Jira and maintaining documentation in Confluence
 
-#### Key Achievements:
-- Design and implementation of Analytical DB of AF&AML (Anti-Fraud & Anti-Money-Laundering) System as an analyst and developer
-- Automated the checking of Confluence objects' pages for standards compliance and created terms of reference in Confluence using Python, HTML+CSS, Django/PHP
-- Contributed to architectural discussions, reviewed business analysts' proposals on the implementation of new features on the AF&AML system
-- Implemented a new documentation maintenance and review workflow for terms of reference and test-cases for AFAML system tasks while being a team lead
+#### Notable Achievements:
+- Led a team of analysts and developers in the design, development, and maintenance of the AF&AML system
+- Successfully orchestrated the design and implementation of Analytical DB of AF&AML system, enhancing the system's capabilities in detecting and preventing fraudulent activities
+- Automated the critical process of checking of Confluence objects' pages for standards compliance and creation terms of reference utilizing Python, HTML+CSS, Django/PHP
+- Played a key role in contributing to architectural discussions and reviewing business analysts' proposals on the implementation of new features on the AF&AML system
+- Spearheaded the implementation of a robust documentation and review workflow, enhancing the clarity and effectiveness of terms of reference and test-case documentation of AFAML system tasks while being a team lead
 
 #### Previously held positions:
 - Middle Analyst: _(Jan 2021 - Aug 2021)_
 - Analyst: _(Feb 2020 - Jan 2021)_
 <br><br>
 
-### Business Analyst @ [Renaissance Credit](https://rencredit.ru/)
-_(Aug 2018 - Feb 2020)_
+### Business Analyst @ [Renaissance Credit](https://rencredit.ru/) _(Aug 2018 - Feb 2020)_
 
 #### Key Qualifications & Responsibilities:
 - SQL coding: Preparing ad-hoc queries based on business consumers' requests; gathering data from numerous different sources for preparing, visualizing, and supporting regular reporting using PL/SQL Developer, SQL Server Management Studio, Tableau
 - Development and technical support of solutions for reports distribution (VBScript)
 
-#### Key Achievements:
+#### Notable Achievements:
 - Developed a workflow for using Oracle PL/SQL Developer's built-in features (scheduler, jobs, chains)
 <br><br>
 
