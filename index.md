@@ -9,15 +9,23 @@ _Data Analyst / Engineer_ <br>
 ### Lead DWH Analyst @ [Renaissance Credit](https://rencredit.ru/) _(Feb 2020 - Dec 2023)_
 
 #### Key Qualifications & Responsibilities:
-- Tasks evaluation: Conducting preliminary analysis of business requirements; exploring possibilities for task realization under current DWH standards and conditions; advocating chosen approaches within the DWH team
-- **Analysis**: Creating coding prototypes (SQL scripts); preparing technical specifications/documentation; resolving incidents/problems; conducting demonstrational meetings with business consumers; handling new tasks and regular improvements of DWH DB and its layers (ODS, detail layer, and datamarts)
+- **Analysis**:
+  - Creating coding prototypes (SQL scripts)
+  - Preparing technical specifications/documentation
+  - Resolving incidents/problems
+  - Conducting demonstrational meetings with business consumers
+  - Handling new tasks and regular improvements of DWH DB and its layers (ODS, detail layer, and datamarts)
 - **Development**:
   - Coding workflows/sessions/maps in Informatica PC
   - developing packages/procedures/functions in Oracle PL/SQL
-- Maintenance and support: Overseeing task maintenance from business requirements clarification to UAT finish; collaborating with business consumers, IT managers, developers, and QA engineers
-- Automation: Executing various tasks aimed at simplifying the working process
-- Mentoring: Guiding and mentoring a team of 6 employees, facilitating their integration into the working flow
-- Accounting: Recording time and tasks progress in Jira; maintaining documentation in Confluence
+- **Tasks evaluation**:
+  - Conducting preliminary analysis of business requirements
+  - Exploring possibilities for task realization under current DWH standards and conditions
+  - Advocating chosen approaches within the DWH team
+- **Maintenance and support**: Overseeing task maintenance from business requirements clarification to UAT finish and collaborating with business consumers, IT managers, developers, and QA engineers
+- **Automation**: Executing various tasks aimed at simplifying the working process
+- **Mentoring**: Guiding and mentoring a team of 6 employees, facilitating their integration into the working flow
+- **Accounting**: Recording time and tasks progress in Jira and maintaining documentation in Confluence
 
 #### Key Achievements:
 - Design and implementation of Analytical DB of AF&AML (Anti-Fraud & Anti-Money-Laundering) System as an analyst and developer
