@@ -6,51 +6,53 @@ _Data Analyst / Engineer_ <br>
 
 ## 👨🏻‍💻 Working Experience
 
-### Lead DWH Analyst @ [Renaissance Credit](https://rencredit.ru/)
-_(Feb 2020 - Present)_
+### Lead DWH Analyst @ [Renaissance Credit](https://rencredit.ru/) _(Feb 2020 - Dec 2023)_
 
 #### Key Qualifications & Responsibilities:
-- Tasks evaluation: Preliminary analysis of business requirements; searching for the possibility of task realization under current DWH standards and conditions; defending chosen approaches in the face of other DWH team members.
-- Analysis: Coding prototype (SQL script); writing technical specification/documentation; solving incidents/problems; holding demonstrational meetings with business consumers; executing brand-new tasks and regular improvements of DWH DB and its layers (ODS, detail layer, and datamarts).
-- Development: Code/workflows/sessions/maps development in Informatica PC; packages/procedures/functions development in Oracle PL/SQL.
-- Accounting: Time and tasks progress recording in Jira; documentation maintenance in Confluence.
-- Maintenance and support: Full task maintenance ranging from business requirements clarification to UAT finish; interaction with business consumers, IT managers, developers, and QA engineers.
-- Automatization: Execution of different tasks directed at working process simplification.
-- Mentoring.
+- Tasks evaluation: Conducting preliminary analysis of business requirements; exploring possibilities for task realization under current DWH standards and conditions; advocating chosen approaches within the DWH team
+- **Analysis**: Creating coding prototypes (SQL scripts); preparing technical specifications/documentation; resolving incidents/problems; conducting demonstrational meetings with business consumers; handling new tasks and regular improvements of DWH DB and its layers (ODS, detail layer, and datamarts)
+- **Development**:
+  - Coding workflows/sessions/maps in Informatica PC
+  - developing packages/procedures/functions in Oracle PL/SQL
+- Maintenance and support: Overseeing task maintenance from business requirements clarification to UAT finish; collaborating with business consumers, IT managers, developers, and QA engineers
+- Automation: Executing various tasks aimed at simplifying the working process
+- Mentoring: Guiding and mentoring a team of 6 employees, facilitating their integration into the working flow
+- Accounting: Recording time and tasks progress in Jira; maintaining documentation in Confluence
 
 #### Key Achievements:
-- Design and implementation of Analytical DB of AF&AML (Anti-Fraud & Anti-Money-Laundering) System as an analyst and developer.
-- Automatization (using Python & HTML+CSS & Django/PHP) of checking Confluence objects' pages for standards compliance and creating terms of reference in Confluence.
+- Design and implementation of Analytical DB of AF&AML (Anti-Fraud & Anti-Money-Laundering) System as an analyst and developer
+- Automated the checking of Confluence objects' pages for standards compliance and created terms of reference in Confluence using Python, HTML+CSS, Django/PHP
+- Contributed to architectural discussions, reviewed business analysts' proposals on the implementation of new features on the AF&AML system
+- Implemented a new documentation maintenance and review workflow for terms of reference and test-cases for AFAML system tasks while being a team lead
 
-#### Previous Positions:
-- Middle Analyst: Jan 2021 - Aug 2021
-- Analyst: Feb 2020 - Jan 2021
+#### Previously held positions:
+- Middle Analyst: _(Jan 2021 - Aug 2021)_
+- Analyst: _(Feb 2020 - Jan 2021)_
 <br><br>
 
-### Manager @ [Renaissance Credit](https://rencredit.ru/)
+### Business Analyst @ [Renaissance Credit](https://rencredit.ru/)
 _(Aug 2018 - Feb 2020)_
 
 #### Key Qualifications & Responsibilities:
-- SQL coding: Preparing ad-hoc queries on business consumers' requests; gathering data from many different sources for preparing, visualizing, and supporting regular reporting with the use of PL/SQL Developer, SQL Server Management Studio, Tableau.
-- Development and support of solutions for reports distribution (VBScript).
-- Mentoring.
+- SQL coding: Preparing ad-hoc queries based on business consumers' requests; gathering data from numerous different sources for preparing, visualizing, and supporting regular reporting using PL/SQL Developer, SQL Server Management Studio, Tableau
+- Development and technical support of solutions for reports distribution (VBScript)
 
 #### Key Achievements:
-- Developed a standard for using Oracle PL/SQL Developer's built-in features (scheduler, jobs, chains).
+- Developed a workflow for using Oracle PL/SQL Developer's built-in features (scheduler, jobs, chains)
 <br><br>
 
 ## 🎓 Education
 
-**Bachelor Degree**  
-_(2014 - 2018)_  
+**Bachelor Degree**  _(2014 - 2018)_  
 Bauman State Technical University  
 _Fundamental Sciences, Mathematics, Applied Mathematics_
 
 ## 🚀 Key Skills
 
 **Technical Skills:**  
-- SQL, ETL (Informatica PC), PL/SQL
-- Python, HTML, CSS
+- SQL, ETL (Informatica PC), PL/SQL, Python
+- SAS ESP, SAS VI
+- HTML, CSS
 - MS Excel, VBScript, Tableau
 - Confluence, Jira, GitLab, Trello
 - Wolfram Mathematica, MathCAD, MATLAB, ANSYS, C++, MS Visual Studio
@@ -67,10 +69,8 @@ _Fundamental Sciences, Mathematics, Applied Mathematics_
 🇷🇺 **Russian** — Native  
 🇺🇸 **English**: — Upper-Intermediate
 
-## 🌐 Additional Information
-
-**About Me:**
-- **Hobbies:** Reading, sports (swimming, surfing, basketball), programming, cryptocurrencies, web3.
+## 🌐 Additional Information 
+**Hobbies:** Reading, sports (swimming, surfing, basketball), programming, cryptocurrencies, web3
 
 **Personal Qualities:**
 - Responsible
