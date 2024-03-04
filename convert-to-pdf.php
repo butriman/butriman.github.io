@@ -1,7 +1,7 @@
 <?php
 
 require_once 'vendor/autoload.php';
-include('path/to/emoji.php'); // Adjust the path as necessary
+require 'vendor/autoload.php';
 
 // Load your Markdown content
 $markdownContent = file_get_contents('index.md');
