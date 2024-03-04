@@ -2,6 +2,8 @@ name: Convert CV to PDF
 
 on:
   push:
+    branches:
+        - trial
     paths:
       - '**.md'
       - '**.yml'
