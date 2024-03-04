@@ -1,0 +1,23 @@
+name: Generate PDF
+
+on:
+  push:
+    branches:
+      - trial
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Pandoc and fonts
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc fonts-noto-color-emoji
+
+    - name: Generate PDF
+      run: |
+        pandoc index.md -o cv.pdf
