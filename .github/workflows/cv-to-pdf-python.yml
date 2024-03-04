@@ -1,0 +1,34 @@
+name: Convert Site to PDF
+
+on:
+  push:
+    branches:
+      - trial
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install wkhtmltopdf
+      run: sudo apt-get install wkhtmltopdf
+
+    - name: Install PDFKit
+      run: pip install pdfkit
+
+    - name: Convert website to PDF
+      run: python -c "import pdfkit; pdfkit.from_url('https://butriman.github.io/', 'butriman_cv.pdf')"
+
+    - name: Upload PDF
+      uses: actions/upload-artifact@v2
+      with:
+        name: butriman_cv.pdf
+        path: butriman_cv.pdf
