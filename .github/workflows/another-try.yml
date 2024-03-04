@@ -27,7 +27,7 @@ jobs:
       run: ls -l vendor
 
     - name: Check for specific function or class existence
-      run: php -r "require 'vendor/autoload.php'; echo class_exists('SomeClass') ? 'exists' :'does not exist';" 
+      run: php -r "require 'vendor/autoload.php'; echo class_exists('Parsedown') ? 'exists' :'does not exist';" 
 
     - name: Convert Markdown/YAML to PDF
       run: php convert-to-pdf.php
