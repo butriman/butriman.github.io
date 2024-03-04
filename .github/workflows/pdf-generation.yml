@@ -12,10 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install LaTeX and Required Fonts
+    - name: Install Pandox, LaTeX and Required Fonts
       run: |
         sudo apt-get update
-        sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra fonts-noto-color-emoji
+        sudo apt-get install -y pandoc texlive-xetex texlive-latex-extra texlive-fonts-extra fonts-noto-color-emoji
 
     - name: Convert Markdown to PDF
       run: |
