@@ -1,4 +1,4 @@
-name: Generate PDF
+name: Convert Markdown to PDF with Emoji Support
 
 on:
   push:
@@ -6,21 +6,21 @@ on:
       - trial
 
 jobs:
-  build:
+  convert:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
-    - name: Install dependencies
+    - name: Install LaTeX and Required Fonts
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra fonts-noto-color-emoji
 
     - name: Convert Markdown to PDF
       run: |
-        pandoc index.md -o your_cv.pdf --pdf-engine=xelatex -V mainfont="Noto Color Emoji"
-    
+        pandoc index_cv.md -o your_cv.pdf --pdf-engine=xelatex -V mainfont="DejaVu Sans" -V emojiFont="Noto Color Emoji"
+
     - name: Upload PDF
       uses: actions/upload-artifact@v2
       with:
