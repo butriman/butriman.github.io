@@ -1,6 +1,5 @@
 <?php
 
-require_once 'vendor/autoload.php';
 require 'vendor/autoload.php';
 
 // Load your Markdown content
