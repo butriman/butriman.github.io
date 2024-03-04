@@ -1,0 +1,22 @@
+name: Convert GitHub Pages to PDF (node)
+
+on:
+  push:
+    branches:
+      - trial
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18' 
+    - run: npm install puppeteer
+    - run: node convert-to-pdf.js
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Converted-PDF
+        path: output.pdf
