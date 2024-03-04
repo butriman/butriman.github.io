@@ -1,6 +1,6 @@
 {
     "require": {
-        "dompdf/dompdf": "v2.0.4",
+        "dompdf/dompdf": "^v2.0.4",
         "iamcal/php-emoji": "dev-master"
     }
 }
