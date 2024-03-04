@@ -33,7 +33,7 @@ jobs:
       run: php convert-to-pdf.php
 
     - name: Upload PDF
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
-        name: cv.pdf
+        name: Converted-PDF
         path: cv.pdf
