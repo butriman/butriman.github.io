@@ -19,7 +19,7 @@ jobs:
 
     - name: Convert Markdown to PDF
       run: |
-        pandoc index_cv.md -o your_cv.pdf --pdf-engine=xelatex -V mainfont="DejaVu Sans" -V emojiFont="Noto Color Emoji"
+        pandoc index.md -o butriman_cv.pdf --pdf-engine=xelatex -V mainfont="DejaVu Sans" -V emojiFont="Noto Color Emoji"
 
     - name: Upload PDF
       uses: actions/upload-artifact@v2
