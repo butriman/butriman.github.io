@@ -10,14 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-    - name: Install Pandoc and fonts
+    - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y pandoc fonts-noto-color-emoji
+        sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra fonts-noto-color-emoji
 
-    - name: Generate PDF
+    - name: Convert Markdown to PDF
       run: |
-        pandoc index.md -o cv.pdf
+        pandoc index.md -o your_cv.pdf --pdf-engine=xelatex -V mainfont="Noto Color Emoji"
+    
+    - name: Upload PDF
+      uses: actions/upload-artifact@v2
+      with:
+        name: CV-PDF
+        path: butriman_cv.pdf
