@@ -21,11 +21,8 @@ jobs:
     - name: Install wkhtmltopdf
       run: sudo apt-get install wkhtmltopdf
 
-    - name: Install PDFKit
-      run: pip install pdfkit
-
-    - name: Install emoji
-      run: pip install emoji
+    - name: Install PDFKit, emoji & markdown
+      run: pip install pdfkit emoji markdown
 
     - name: Replace emojis and generate new MD file
       run: python cv-to-pdf.py index.md > updated_index.md
