@@ -30,8 +30,10 @@ def replace_emojis_in_md(file_path):
         return char
 
     updated_content = emoji.get_emoji_regexp().sub(emoji_replacer, content)
+    print('updated_content: ', updated_content)
 
     # Convert Markdown to HTML
     html_content = markdown.markdown(updated_content)
+    print('html_content: ', html_content)
     
     pdfkit.from_string(html_content, 'butriman_cv.pdf')
