@@ -37,4 +37,3 @@ jobs:
         git checkout -b trial
         git add butriman_cv.pdf
         git commit -m "Add generated PDF"
-        git push origin trial
