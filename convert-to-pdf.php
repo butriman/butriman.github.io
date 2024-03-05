@@ -2,14 +2,15 @@
 
 require 'vendor/autoload.php';
 
-use Astrotomic\Twemoji\Twemoji;
 use Dompdf\Dompdf;
 
 // Load your Markdown content
 $markdownContent = file_get_contents('index.md');
 
-// Convert emojis to Twemoji image Markdown
-$markdownContent = Twemoji::text($markdownContent)->toMarkdown();
+$emojiToRemove = ["👨‍💻", "🎓️", "🚀", "🇷🇺", "🇺🇸", "🌐", "💻️", "🏊‍♂️", "🏄‍♂️"]; // List emojis you want to remove
+foreach ($emojiToRemove as $emoji) {
+    $markdownContent = str_replace($emoji, '', $markdownContent); // Remove the emoji
+}
 
 // Convert Markdown with Twemoji images to HTML
 $htmlContent = Parsedown::instance()->text($markdownContent);
