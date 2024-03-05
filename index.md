@@ -2,9 +2,9 @@
 
 _Data Analyst / Engineer_ <br>
 
-[Email](mailto:butriman@icloud.com) / [LinkedIn](https://linkedin.com/in/vbutrimenko) / [Telegram](https://t.me/butriman)
+[Email](mailto:butriman@icloud.com) / [LinkedIn](https://linkedin.com/in/vbutrimenko) / [Telegram](https://t.me/butriman) / [Web-based CV](https://butriman.github.io/)
 
-## 👨🏻‍💻 Working Experience
+## 👨‍💻 Working Experience
 
 ### Lead DWH Analyst @ [Renaissance Credit](https://rencredit.ru/) _(Feb 2020 - Dec 2023)_
 
@@ -51,7 +51,7 @@ _Data Analyst / Engineer_ <br>
 - Developed a workflow for using Oracle PL/SQL Developer's built-in features (scheduler, jobs, chains)
 <br><br>
 
-## 🎓 Education
+## 🎓️ Education
 
 **Bachelor Degree**  _(2014 - 2018)_  
 Bauman State Technical University  
