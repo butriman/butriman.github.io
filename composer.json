@@ -1,8 +1,6 @@
 {
     "require": {
         "dompdf/dompdf": "^2.0.4",
-        "iamcal/php-emoji": "dev-master",
-        "erusev/parsedown": "^1.7.4",
-        "astrotomic/php-twemoji": "^0.2.4"
+        "erusev/parsedown": "^1.7.4"
     }
 }
