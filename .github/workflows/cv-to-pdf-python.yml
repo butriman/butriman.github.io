@@ -24,6 +24,9 @@ jobs:
     - name: Install PDFKit
       run: pip install pdfkit
 
+    - name: Install emoji
+      run: pip install emoji
+
     - name: Replace emojis and generate new MD file
       run: python cv-to-pdf.py index.md > updated_index.md
 
