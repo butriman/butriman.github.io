@@ -1,11 +1,10 @@
-import emoji
 import markdown
 import pdfkit
+import re
 
 def replace_emojis_in_md(file_path):
     # Defining emoji to image mapping
     emoji_image_map = {
-        "😀": "https://example.com/emoji_images/grinning.png",
         "👨‍💻": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f468-200d-1f4bb.svg",
         "🎓️": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f393.svg",
         "🚀": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f680.svg",
@@ -28,12 +27,17 @@ def replace_emojis_in_md(file_path):
         if image_url:
             return f"![{char}]({image_url})"
         return char
+    
+    pattern = re.compile('|'.join(re.escape(key) for key in emoji_image_map.keys()))
 
-    updated_content = emoji.get_emoji_regexp().sub(emoji_replacer, content)
-    print('updated_content: ', updated_content)
+    # Replace using the emoji_replacer function
+    updated_content = pattern.sub(emoji_replacer, content)
+
+    #updated_content = emoji.get_emoji_regexp().sub(emoji_replacer, content)
+    #print('updated_content: ', updated_content)
 
     # Convert Markdown to HTML
     html_content = markdown.markdown(updated_content)
-    print('html_content: ', html_content)
-    
+    #print('html_content: ', html_content)
+
     pdfkit.from_string(html_content, 'butriman_cv.pdf')
