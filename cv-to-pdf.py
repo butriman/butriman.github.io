@@ -1,4 +1,5 @@
 import emoji
+import markdown
 
 def replace_emojis_in_md(file_path):
     # Defining emoji to image mapping
@@ -28,5 +29,8 @@ def replace_emojis_in_md(file_path):
         return char
 
     updated_content = emoji.get_emoji_regexp().sub(emoji_replacer, content)
+
+    # Convert Markdown to HTML
+    html_content = markdown.markdown(updated_content)
     
     print(updated_content)
