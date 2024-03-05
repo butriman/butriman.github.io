@@ -24,11 +24,8 @@ jobs:
     - name: Install PDFKit, emoji & markdown
       run: pip install pdfkit emoji markdown
 
-    - name: Replace emojis and generate new MD file
+    - name: Replace emojis and convert website to PDF
       run: python cv-to-pdf.py index.md > updated_index.md
-
-    - name: Convert website to PDF
-      run: python -c "import pdfkit; pdfkit.from_file('updated_index.md', 'butriman_cv.pdf')"
 
     - name: Upload PDF
       uses: actions/upload-artifact@v2
