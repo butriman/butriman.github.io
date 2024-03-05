@@ -1,4 +1,4 @@
-name: Convert Site to PDF
+name: Convert Site to PDF (py)
 
 on:
   push:
@@ -24,8 +24,11 @@ jobs:
     - name: Install PDFKit
       run: pip install pdfkit
 
+    - name: Replace emojis and generate new MD file
+      run: python cv-to-pdf.py index.md > updated_index.md
+
     - name: Convert website to PDF
-      run: python -c "import pdfkit; pdfkit.from_url('https://butriman.github.io/', 'butriman_cv.pdf')"
+      run: python -c "import pdfkit; pdfkit.from_file('updated_index.md', 'butriman_cv.pdf')"
 
     - name: Upload PDF
       uses: actions/upload-artifact@v2
