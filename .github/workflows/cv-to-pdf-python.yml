@@ -27,6 +27,15 @@ jobs:
     - name: Replace emojis and convert website to PDF
       run: python cv-to-pdf.py index.md
 
+    - name: Check PDF file existence
+      run: |
+        if [ -f "butriman_cv.pdf" ]; then
+          echo "PDF file exists."
+        else
+          echo "PDF file does not exist."
+          exit 1 # Causes the workflow to fail if the PDF isn't found
+        fi
+
     - name: Upload PDF
       uses: actions/upload-artifact@v2
       with:
