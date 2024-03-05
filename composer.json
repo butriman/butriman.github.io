@@ -3,6 +3,6 @@
         "dompdf/dompdf": "^2.0.4",
         "iamcal/php-emoji": "dev-master",
         "erusev/parsedown": "^1.7.4",
-        "strotomic/php-twemoji": "^0.2.4"
+        "astrotomic/php-twemoji": "^0.2.4"
     }
 }
