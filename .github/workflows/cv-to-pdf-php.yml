@@ -1,0 +1,33 @@
+name: Convert CV to PDF
+
+on:
+  push:
+    branches:
+        - trial
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'
+        extensions: mbstring, dom
+        tools: composer
+
+    - name: Install PHP dependencies
+      run: composer install
+
+    - name: Convert Markdown/YAML to PDF
+      run: php convert-to-pdf.php
+
+    - name: Upload PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: Converted-PDF
+        path: butriman_cv.pdf
