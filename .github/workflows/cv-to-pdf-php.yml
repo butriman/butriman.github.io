@@ -34,6 +34,6 @@ jobs:
 
     - name: Commit and Push PDF to Branch
       run: |
-        git checkout -b trial
+        git checkout trial
         git add butriman_cv.pdf
         git commit -m "Add generated PDF"
