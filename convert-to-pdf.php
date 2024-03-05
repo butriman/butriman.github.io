@@ -2,16 +2,17 @@
 
 require 'vendor/autoload.php';
 
+use Astrotomic\Twemoji\Twemoji;
+use Dompdf\Dompdf;
+
 // Load your Markdown content
 $markdownContent = file_get_contents('index.md');
 
-// Convert Markdown to HTML
+// Convert emojis to Twemoji image Markdown
+$markdownContent = Twemoji::text($markdownContent)->toMarkdown();
+
+// Convert Markdown with Twemoji images to HTML
 $htmlContent = Parsedown::instance()->text($markdownContent);
-
-// Convert emojis to HTML
-$htmlContent = emoji_unified_to_html($htmlContent);
-
-use Dompdf\Dompdf;
 
 $dompdf = new Dompdf();
 $dompdf->loadHtml($htmlContent);
@@ -20,3 +21,4 @@ $dompdf->render();
 
 // Save the PDF
 file_put_contents('butriman_cv.pdf', $dompdf->output());
+
