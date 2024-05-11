@@ -12,11 +12,11 @@ _Data Analyst / Engineer_ <br>
 Developed an advanced automated trading bot that executes trades based on algorithmic analysis of real-time market data. This project underscores my proficiency in software development and financial technology, showcasing a fully automated system that adjusts dynamically to market conditions
 
 #### Technical Contributions
-- **Algorithm Design and Implementation**: Designed and programmed complex trading algorithms (Fibonacci Retracement based) to predict market movements and execute trades with high accuracy. Utilized _Python_ libraries such as _pandas_, _plotly_, _requests_, and _telebot_ to enhance data analysis and real-time interactions
-- **System Architecture Development**: Engineered a complete system setup from the ground up, integrating _Python_ and _PostgreSQL_ for data handling and processing. Utilized _PL/pgSQL_ for efficient ETL processes
-- **Data Management**: Implemented robust database solutions with _PostgreSQL_, ensuring data integrity and efficient handling to support complex trading operations
-- **Real-time Data Processing**: Utilized Bybit's Crypto Exchange API to pull in live data and manage assets, enabling the bot to autonomously handle positions and adjust strategies in real time.
-- **System Deployment and Management**: Deployed the trading bot on a _Linux_ server, optimizing system performance for 24/7 operation and ensuring stability
+- **Algorithm Design and Implementation**: Designed and programmed complex trading algorithms (Fibonacci Retracement based) to predict market movements and execute trades with high accuracy. Utilized ___Python___ libraries such as ___pandas___, ___plotly___, ___requests___, and ___telebot___ to enhance data analysis and real-time interactions
+- **System Architecture Development**: Engineered a complete system setup from the ground up, integrating ___Python___ and ___PostgreSQL___ for data handling and processing. Utilized ___PL/pgSQL___ for efficient ___ETL___ processes
+- **Data Management**: Implemented robust database solutions with ___PostgreSQL___, ensuring data integrity and efficient handling to support complex trading operations
+- **Real-time Data Processing**: Utilized Bybit's Crypto Exchange API to pull in live data and manage assets, enabling the bot to autonomously handle positions and adjust strategies in real time
+- **System Deployment and Management**: Deployed the trading bot on a ___Linux___ server, optimizing system performance for 24/7 operation and ensuring stability
 - **Performance Optimization**: Continuously monitored and optimized the system's performance, refining algorithms and improving responsiveness through adaptive strategy adjustments
 
 #### Notable Achievements
@@ -37,21 +37,21 @@ Developed an advanced automated trading bot that executes trades based on algori
   - Handling new tasks and regular improvements of DWH DB, its layers (Operational Data Store, detail layer, and datamarts) and the Anti-Fraud & Anti-Money-Laundering (AF&AML) system
   - Contributing significantly to reviewing architectural and business aspects of changes in the microservice layer interacting with the AF&AML system
 - **Development**:
-  - Creating coding prototypes (_SQL_ scripts)
-  - Coding workflows/sessions/maps in _Informatica PC_
-  - Developing packages/procedures/functions in _Oracle PL/SQL_
-  - Creating project workflows using _SAS ESP Studio Management_
+  - Creating coding prototypes (___SQL___ scripts)
+  - Coding workflows/sessions/maps in ___Informatica PC___
+  - Developing packages/procedures/functions in ___Oracle PL/SQL___
+  - Creating project workflows using ___SAS ESP Studio Management___
 - **Maintenance and support**:
   - Resolving incidents/problems as part of third-line support, where our team took responsibility for incident resolution in the DWH and AF&AML (24/7 mission-critical) systems
   - Overseeing task maintenance from business requirements clarification to UAT finish and collaborating with business consumers, IT managers, developers, and QA engineers
 - **Automation**: Executing various tasks aimed at simplifying the working process
 - **Mentoring**: Guiding and mentoring a team of 6 employees, facilitating their integration into the working flow
-- **Accounting**: Recording time and tasks progress in Jira and maintaining documentation in Confluence
+- **Accounting**: Recording time and tasks progress in ___Jira___ and maintaining documentation in ___Confluence___
 
 #### Notable Achievements:
 - Led a team of analysts and developers in the design, development, and maintenance of the AF&AML system
 - Successfully orchestrated the design and implementation of Analytical DB of AF&AML system, enhancing the system's capabilities in detecting and preventing fraudulent activities
-- Automated the critical process of checking of Confluence objects' pages for standards compliance and creation terms of reference utilizing _Python_, _HTML_ + _CSS_, _Django_/_PHP_
+- Automated the critical process of checking of ___Confluence___ objects' pages for standards compliance and creation terms of reference utilizing ___Python___, ___HTML___ + ___CSS___, ___Django___, ___PHP___
 - Played a key role in contributing to architectural discussions and reviewing business analysts' proposals on the implementation of new features on the AF&AML system
 - Spearheaded the implementation of a robust documentation and review workflow, enhancing the clarity and effectiveness of terms of reference and test-case documentation of AFAML system tasks while being a team lead
 
@@ -63,11 +63,11 @@ Developed an advanced automated trading bot that executes trades based on algori
 ### Business Analyst @ [Renaissance Credit](https://rencredit.ru/) _(Aug 2018 - Feb 2020)_
 
 #### Key Qualifications & Responsibilities:
-- _SQL_ coding: Preparing ad-hoc queries based on business consumers' requests; gathering data from numerous different sources for preparing, visualizing, and supporting regular reporting using _PL/SQL Developer_, _SQL Server Management Studio_, _Tableau_
-- Development and technical support of solutions for reports distribution (_VBScript_)
+- _SQL_ coding: Preparing ad-hoc queries based on business consumers' requests; gathering data from numerous different sources for preparing, visualizing, and supporting regular reporting using ___PL/SQL Developer___, ___SQL Server Management Studio___, ___Tableau___
+- Development and technical support of solutions for reports distribution (___VBScript___)
 
 #### Notable Achievements:
-- Developed a workflow for using _Oracle PL/SQL Developer's_ built-in features (scheduler, jobs, chains)
+- Developed a workflow for using ___Oracle PL/SQL Developer's___ built-in features (scheduler, jobs, chains)
 <br><br>
 
 ## 🎓️ Education
@@ -79,11 +79,12 @@ _Fundamental Sciences, Mathematics, Applied Mathematics_
 ## 🚀 Key Skills
 
 **Technical Skills:**  
-- _SQL_, ETL (_Informatica PC_), _PL/SQL_, _Python_
+- _SQL_, _ETL_ (_Informatica PC_), _PL/SQL_, _PL/pgSQL_
+- _Python_, _Django_
 - _SAS ESP_, _SAS VI_
 - _HTML_, _CSS_
 - _MS Excel_, _VBScript_, _Tableau_
-- Confluence, Jira, GitLab, Trello
+- Confluence, Jira, Git, GitLab, Trello
 - _Wolfram Mathematica_, _MathCAD_, _MATLAB_, _ANSYS_, _C++_, MS Visual Studio
 
 **Skills:**  
