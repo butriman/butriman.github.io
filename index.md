@@ -17,9 +17,9 @@ _Data Analyst / Engineer_ <br>
 Developed an advanced automated trading bot that executes trades based on algorithmic analysis of real-time market data. This project highlights my proficiency in software development and financial technology, featuring a fully automated system that adapts to varying market conditions through flexible parameter adjustments
 
 #### Technical Contributions
-- **Algorithm Design and Implementation**: Designed and programmed complex trading algorithms (Fibonacci Retracement based) to predict market movements and execute trades with high accuracy. Incorporated the use of Python libraries such as pandas, plotly, requests, and telebot to enhance data analysis and real-time interaction capabilities
-- **System Architecture Development**: Engineered a complete system setup from the ground up, integrating Python and PostgreSQL for data handling, processing, and trading operations. Utilized PL/pgSQL for efficient ETL processes
-- **Data Management and Security**: Implemented robust database solutions with PostgreSQL, ensuring data integrity and efficient data handling to support complex trading operations
+- **Algorithm Design and Implementation**: Designed and programmed complex trading algorithms (Fibonacci Retracement based) to predict market movements and execute trades with high accuracy. Incorporated the use of _Python_ libraries such as _pandas_, _plotly_, _requests_, and _telebot_ to enhance data analysis and real-time interaction capabilities
+- **System Architecture Development**: Engineered a complete system setup from the ground up, integrating _Python_ and _PostgreSQL_ for data handling, processing, and trading operations. Utilized _PL/pgSQL_ for efficient ETL processes
+- **Data Management and Security**: Implemented robust database solutions with _PostgreSQL_, ensuring data integrity and efficient data handling to support complex trading operations
 - **Real-time Data Processing**: Utilized Bybit's Crypto Exchange API to pull in live data and manage assets, enabling the bot to autonomously handle positions and adjust strategies in real time
 - **System Deployment and Management**: Deployed the trading bot on a Linux server, optimizing system performance for 24/7 operation and ensuring stability and security in a live trading environment
 - **Performance Optimization**: Continuously monitored and optimized the system's performance, refining algorithms and improving system responsiveness through adaptive strategy adjustments
