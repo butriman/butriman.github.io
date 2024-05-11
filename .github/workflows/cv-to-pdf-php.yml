@@ -4,6 +4,7 @@ on:
   push:
     branches:
         - trial
+        - trial_2
 
 jobs:
   convert:
