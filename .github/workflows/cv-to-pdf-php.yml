@@ -3,7 +3,7 @@ name: Convert CV to PDF
 on:
   push:
     branches:
-        - trial_2
+        - trial_2 
 
 jobs:
   convert:
