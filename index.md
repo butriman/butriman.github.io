@@ -6,7 +6,31 @@ _Data Analyst / Engineer_ <br>
 
 ## 👨‍💻 Working Experience
 
-### Lead DWH Analyst @ [Renaissance Credit](https://rencredit.ru/) _(Feb 2020 - Dec 2023)_
+### Freelance Developer _(Aug 2023 - Present)_
+
+#### Key Technologies
+- **Programming Languages & Frameworks**: Python
+- **Database Management**: PostgreSQL
+- **APIs**: Crypto Exchanges API
+
+#### Project Summary
+Developed an advanced automated trading bot that executes trades based on algorithmic analysis of real-time market data. This project highlights my proficiency in software development and financial technology, featuring a fully automated system that adapts to varying market conditions through flexible parameter adjustments
+
+#### Technical Contributions
+- **Algorithm Design and Implementation**: Designed and programmed complex trading algorithms (Fibonacci Retracement based) to predict market movements and execute trades with high accuracy. Incorporated the use of Python libraries such as pandas, plotly, requests, and telebot to enhance data analysis and real-time interaction capabilities
+- **System Architecture Development**: Engineered a complete system setup from the ground up, integrating Python and PostgreSQL for data handling, processing, and trading operations. Utilized PL/pgSQL for efficient ETL processes
+- **Data Management and Security**: Implemented robust database solutions with PostgreSQL, ensuring data integrity and efficient data handling to support complex trading operations
+- **Real-time Data Processing**: Utilized Bybit's Crypto Exchange API to pull in live data and manage assets, enabling the bot to autonomously handle positions and adjust strategies in real time
+- **System Deployment and Management**: Deployed the trading bot on a Linux server, optimizing system performance for 24/7 operation and ensuring stability and security in a live trading environment
+- **Performance Optimization**: Continuously monitored and optimized the system's performance, refining algorithms and improving system responsiveness through adaptive strategy adjustments
+
+#### Notable Achievements
+- **Reliability and Efficiency**: Successfully built and maintained a trading bot that operates 24/7
+- **Performance Improvement**: Dramatically enhanced trading efficiency by automating decision processes and executions, significantly reducing the time required to react to market changes compared to manual trading. This automation allows the bot to capitalize on opportunities much faster than is possible by a human trader, leading to a substantial improvement in trading outcomes
+- **Professional Growth**: Enhanced my professional expertise through extensive research and analysis of existing financial technologies and solutions. This self-directed study allowed me to integrate and innovate upon the best practices, significantly advancing my technical skill set
+
+
+### Lead DWH Analyst @ [Renaissance Credit](https://rencredit.ru/) _(Feb 2020 - Aug 2023)_
 
 #### Key Qualifications & Responsibilities:
 - **Analysis**:
