@@ -1,12 +1,23 @@
 # Vladimir Butrimenko
 
-_Data Analyst / Engineer_ <br>
+_Data Engineer / Analytics Engineer_ <br>
 
 [Email](mailto:butriman@icloud.com) / [LinkedIn](https://linkedin.com/in/vbutrimenko) / [Telegram](https://t.me/butriman) / [Web-based CV](https://butriman.github.io/)
 
 ## 👨‍💻 Working Experience
 
-### Freelance Developer _(Aug 2023 - Present)_
+### Data Engineer @ [Renaissance Credit](https://rencredit.ru/) _(Jun 2024 - Present)_
+
+#### Key Qualifications & Responsibilities
+
+- **Data Pipeline Development**: Design, build, and maintain scalable and robust data pipelines to support business analytics initiatives and DWH consumers' needs. Utilize ___PySpark___ framework to ensure efficient data ETL processes
+- **Database Management and Optimization**: Manage database systems, optimize query performance, and ensure data integrity and availability. Implement data modeling and warehousing practices to support complex data storage needs
+- **Data Integration and Automation**: Automate data workflows and integrate data from multiple sources, ensuring seamless data availability across the organization. Use API integrations and ___Python___ to connect disparate systems and automate repetitive tasks
+- **Big Data Technologies**: Utilize big data technologies such as ___Hadoop___ and ___Spark___ to process large datasets and effectively prevent traditional relational databases from becoming overloaded and costly to maintain
+- **Collaboration and Project Management**: Work closely with data analysts, business analysts, platform developers and other IT teams to deliver data-driven solutions aligned with business goals. Participate in project planning, milestone creation, retrospective meetings and progress tracking to ensure timely delivery of data projects
+- **Compliance and Data Security**: Ensure compliance with data governance and security policies to protect sensitive information and meet regulatory requirements
+
+### Freelance Developer _(Aug 2023 - Jun 2024)_
 
 #### Project Summary
 Developed an advanced automated trading bot that executes trades based on algorithmic analysis of real-time market data. This project underscores my proficiency in software development and financial technology, showcasing a fully automated system that adjusts dynamically to market conditions
@@ -25,7 +36,7 @@ Developed an advanced automated trading bot that executes trades based on algori
 - **Professional Growth**: Advanced my technical skill set through extensive research and analysis of existing financial technologies and solutions, integrating and innovating upon best practices
 
 
-### Lead DWH Analyst @ [Renaissance Credit](https://rencredit.ru/) _(Feb 2020 - Aug 2023)_
+### Lead DWH Analytics Engineer @ [Renaissance Credit](https://rencredit.ru/) _(Feb 2020 - Aug 2023)_
 
 #### Key Qualifications & Responsibilities:
 - **Analysis**:
@@ -56,8 +67,8 @@ Developed an advanced automated trading bot that executes trades based on algori
 - Spearheaded the implementation of a robust documentation and review workflow, enhancing the clarity and effectiveness of terms of reference and test-case documentation of AFAML system tasks while being a team lead
 
 #### Previously held positions:
-- Middle Analyst: _(Jan 2021 - Aug 2021)_
-- Analyst: _(Feb 2020 - Jan 2021)_
+- Middle DWH Analytics Engineer: _(Jan 2021 - Aug 2021)_
+- DWH Analytics Engineer: _(Feb 2020 - Jan 2021)_
 <br><br>
 
 ### Business Analyst @ [Renaissance Credit](https://rencredit.ru/) _(Aug 2018 - Feb 2020)_
@@ -79,16 +90,16 @@ _Fundamental Sciences, Mathematics, Applied Mathematics_
 ## 🚀 Key Skills
 
 **Technical Skills:**  
-- _SQL_, _ETL_ (_Informatica PC_), _PL/SQL_, _PL/pgSQL_
-- _Python_, _Django_
-- _SAS ESP_, _SAS VI_
-- _HTML_, _CSS_
-- _MS Excel_, _VBScript_, _Tableau_
-- Confluence, Jira, Git, GitLab, Trello
-- _Wolfram Mathematica_, _MathCAD_, _MATLAB_, _ANSYS_, _C++_, MS Visual Studio
+- __DB Technologies__: _SQL_, _PL/SQL_, _PL/pgSQL_, _Trino_
+- __Programming Languages__: _Python_
+- __Data Processing and Workflow Management__: _Informatica PC_, _SAS ESP_, _SAS VI_, _Apache Spark_, _Apache Airflow_
+- __Data Visualization and Reporting__: _MS Excel_, _VBScript_, _Tableau_, _Power BI_
+- __DevOps Tools__: _Docker_, _Git_, _GitLab_
+- __Collaboration Tools__: _Confluence_, _Jira_, _Trello_, _Notion_, _Obsidian_
+- __Other__: _Django_, _HTML_, _CSS_, _Wolfram Mathematica_, _MATLAB_, _ANSYS_, _C++_
 
 **Skills:**  
-- Data analytics, data warehousing, data visualization
+- Data analytics, data warehousing, coding, data visualization
 - Business intelligence
 - Technical writing
 - Communication skills
