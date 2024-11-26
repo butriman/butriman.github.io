@@ -10,7 +10,7 @@ _Data Engineer / Analytics Engineer_ <br>
 
 #### Key Qualifications & Responsibilities
 
-- **Data Pipeline Development**: Design, build, and maintain scalable and robust data pipelines to support business analytics initiatives and DWH consumers' needs. Utilize ___PySpark___ framework to ensure efficient data ETL processes
+- **Data Pipeline Development**: Design, build, and maintain scalable and robust data pipelines to support business analytics initiatives and DWH consumers' needs. Utilize ___PySpark___ framework to ensure efficient data ETL processes and ___Airflow___ to schedule, coordinate, and manage ETL processes
 - **Database Management and Optimization**: Manage database systems, optimize query performance, and ensure data integrity and availability. Implement data modeling and warehousing practices to support complex data storage needs
 - **Data Integration and Automation**: Automate data workflows and integrate data from multiple sources, ensuring seamless data availability across the organization. Use API integrations and ___Python___ to connect disparate systems and automate repetitive tasks
 - **Big Data Technologies**: Utilize big data technologies such as ___Hadoop___ and ___Spark___ to process large datasets and effectively prevent traditional relational databases from becoming overloaded and costly to maintain
