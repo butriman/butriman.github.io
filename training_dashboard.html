@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тренировочный журнал</title>
+  <style>
+    :root {
+      /* Backgrounds */
+      --color-background-primary:   #1A1B1E;
+      --color-background-secondary: #242528;
+      --color-background-tertiary:  #2E3033;
+      --color-background-info:      #1C3049;
+
+      /* Text */
+      --color-text-primary:         #F0F0F0;
+      --color-text-secondary:       #ABABAB;
+      --color-text-tertiary:        #6B6B6B;
+      --color-text-info:            #60AAEF;
+
+      /* Borders */
+      --color-border-secondary:     #383A3D;
+      --color-border-tertiary:      #2E3033;
+
+      /* Radius */
+      --border-radius-md:           6px;
+      --border-radius-lg:           12px;
+
+      /* Fonts */
+      --font-sans:  system-ui, -apple-system, sans-serif;
+      --font-mono:  "SF Mono", "Fira Code", monospace;
+
+      /* Activity type colors */
+      --color-swim:      #5DCAA5;
+      --color-run:       #EF9F27;
+      --color-ride:      #378ADD;
+      --color-strength:  #7F77DD;
+      --color-ski:       #5BA4E8;
+      --color-recovery:  #9B9895;
+
+      /* HR zone bar colors */
+      --color-z1: #9FE1CB;
+      --color-z2: #5DCAA5;
+      --color-z3: #EF9F27;
+      --color-z4: #D85A30;
+      --color-z5: #C04040;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    #app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Topbar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 56px;
+      padding: 0 24px;
+      background: var(--color-background-secondary);
+      border-bottom: 1px solid var(--color-border-secondary);
+    }
+
+
+    .topbar-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar-main {
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    .topbar-sub {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    .topbar-tabs {
+      display: flex;
+      gap: 16px;
+    }
+
+    .tab-button {
+      padding: 8px 20px;
+      background: transparent;
+      border: 1px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .tab-button.active {
+      color: var(--color-text-primary);
+      background: var(--color-background-info);
+      border-color: var(--color-text-info);
+      font-weight: 500;
+    }
+
+    /* Main content */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    /* Calendar */
+    .calendar-grid {
+      display: none;
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-lg);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .calendar-grid.visible {
+      display: block;
+    }
+
+    .cal-icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      padding: 4px 8px;
+      color: var(--color-text-secondary);
+      line-height: 1;
+    }
+    .cal-icon-btn:hover { color: var(--color-text-primary); }
+
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-background-tertiary);
+      border: 1px solid var(--color-border-secondary);
+      color: var(--color-text-secondary);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, color 0.15s;
+      z-index: 1000;
+      line-height: 1;
+    }
+    .scroll-top-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .scroll-top-btn:hover { color: var(--color-text-primary); }
+
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .cal-nav-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      font-size: 18px;
+      padding: 0 4px;
+      line-height: 1;
+    }
+    .cal-nav-btn:hover { color: var(--color-text-primary); }
+    .cal-month-label { font-size: 14px; font-weight: 600; }
+    .cal-year-label { font-size: 14px; color: var(--color-text-secondary); margin-right: 4px; }
+
+    .calendar-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .calendar-table th {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      padding: 6px 10px 8px;
+      text-align: left;
+      border-top: 1px solid var(--color-border-secondary);
+      border-right: 1px solid var(--color-border-secondary);
+    }
+    .calendar-table th:last-child { border-right: none; }
+
+    .calendar-table td {
+      vertical-align: top;
+      height: 90px;
+      padding: 6px 8px;
+      border-top: 1px solid var(--color-border-secondary);
+      border-right: 1px solid var(--color-border-secondary);
+      font-size: 11px;
+    }
+    .calendar-table td:last-child { border-right: none; }
+
+    .cal-day-num {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      text-align: right;
+      margin-bottom: 4px;
+    }
+    .cal-day-num.today {
+      color: var(--color-text-info);
+      font-weight: 700;
+    }
+    .cal-day-num.other-month {
+      color: var(--color-text-tertiary);
+    }
+
+    .cal-entry {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--color-text-primary);
+      margin-bottom: 2px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: pointer;
+    }
+    .cal-entry-bar {
+      width: 3px;
+      height: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .cal-entry-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 11px;
+    }
+    .cal-overflow {
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+      margin-top: 1px;
+    }
+
+    td.in-highlight {
+      background: var(--color-background-info);
+    }
+    td.is-today {
+      /* border handled by day number */
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid transparent;
+      border-radius: var(--border-radius-md);
+      cursor: pointer;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      transition: all 0.2s;
+    }
+
+    .legend-item:hover {
+      background: var(--color-background-secondary);
+    }
+
+    .legend-item.active {
+      border: 1px solid var(--color-border-secondary);
+      background: var(--color-background-secondary);
+      color: var(--color-text-primary);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Collapse button */
+    .collapse-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      background: transparent;
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: var(--border-radius-md);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      font-size: 11px;
+      margin-bottom: 8px;
+      width: 100%;
+    }
+
+    .collapse-button:hover {
+      border-color: var(--color-border-secondary);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .card.past {
+      opacity: 0.75;
+    }
+
+    .card.future {
+      opacity: 0.55;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--color-text-primary);
+    }
+
+    .card-subheader {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 500;
+      margin-left: 6px;
+    }
+
+    .badge-current {
+      background: var(--color-background-info);
+      color: var(--color-text-info);
+    }
+
+    .badge-status {
+      background: var(--color-background-tertiary);
+      color: var(--color-text-secondary);
+    }
+
+    /* Source badges */
+    .source-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .source-badge.full {
+      background: #1B2E0F;
+      color: #7CB85C;
+    }
+
+    .source-badge.device {
+      background: #0D2340;
+      color: #5AABEF;
+    }
+
+    .source-badge.manual {
+      background: #1A1848;
+      color: #9B8FDD;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .stat {
+      flex: 1;
+      background: var(--color-background-tertiary);
+      padding: 6px;
+      border-radius: var(--border-radius-md);
+      text-align: center;
+    }
+
+    .stat-value {
+      color: var(--color-text-primary);
+      font-weight: 500;
+      font-size: 22px;
+    }
+
+    .stat-label {
+      color: var(--color-text-secondary);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    /* Bar container */
+    .bar-container {
+      display: grid;
+      grid-template-columns: 36px 1fr 80px;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 11px;
+    }
+
+    .bar-label {
+      width: 36px;
+      color: var(--color-text-secondary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .bar-label:hover {
+      color: var(--color-text-primary);
+    }
+
+    .bar-wrapper {
+      flex: 1;
+      height: 11px;
+      background: var(--color-background-tertiary);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .bar {
+      height: 100%;
+      position: relative;
+      display: inline-block;
+    }
+
+    .bar.empty {
+      opacity: 0.3;
+      background: var(--color-recovery) !important;
+    }
+
+    .rest-bar {
+      background: var(--color-background-tertiary);
+      height: 8px;
+      border-radius: 3px;
+      width: 100%;
+    }
+
+    .bar-value {
+      flex-shrink: 0;
+      text-align: right;
+      color: var(--color-text-secondary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    /* Workout row */
+    .workout-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--color-border-tertiary);
+      font-size: 13px;
+    }
+
+    .workout-row:last-child {
+      border-bottom: none;
+    }
+
+    .workout-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .workout-title {
+      flex: 1;
+      color: var(--color-text-primary);
+      cursor: pointer;
+    }
+
+    .workout-title:hover {
+      text-decoration: underline;
+    }
+
+    .workout-metrics {
+      color: var(--color-text-secondary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .workout-flag {
+      width: 12px;
+      text-align: center;
+      color: var(--color-text-primary);
+    }
+
+    .workout-flag.done {
+      color: #1D9E75;
+    }
+
+    .workout-flag.pending {
+      color: var(--color-text-tertiary);
+    }
+
+    .workout-rpe {
+      width: 20px;
+      text-align: center;
+      color: var(--color-text-secondary);
+      font-size: 10px;
+    }
+
+    .badge-status-active {
+      background: #0D2B1A;
+      color: #4DCB7C;
+    }
+    .badge-status-done {
+      background: #1A2620;
+      color: #5A8A68;
+    }
+    .badge-status-planned {
+      background: #1E1A30;
+      color: #8B80CC;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--color-border-tertiary);
+      margin: 12px 0;
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: fixed;
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border-secondary);
+      border-radius: var(--border-radius-md);
+      padding: 7px 9px;
+      font-size: 10px;
+      color: var(--color-text-primary);
+      z-index: 1000;
+      pointer-events: none;
+      max-width: 200px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    /* Zone bar */
+    .zone-bar-container {
+      margin: 8px 0;
+    }
+
+    .zone-badge-row {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .zone-badge {
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .zone-badge.z1 {
+      background: rgba(159, 225, 203, 0.12);
+      color: #9FE1CB;
+    }
+
+    .zone-badge.z2 {
+      background: rgba(93, 202, 165, 0.12);
+      color: #5DCAA5;
+    }
+
+    .zone-badge.z3 {
+      background: rgba(239, 159, 39, 0.12);
+      color: #EF9F27;
+    }
+
+    .zone-badge.z4 {
+      background: rgba(216, 90, 48, 0.12);
+      color: #D85A30;
+    }
+
+    .zone-badge.z5 {
+      background: rgba(192, 64, 64, 0.12);
+      color: #C04040;
+    }
+
+    .zone-bar-visual {
+      display: flex;
+      width: 100%;
+      height: 8px;
+      border-radius: 2px;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .zone-segment {
+      height: 100%;
+      position: relative;
+    }
+
+    /* Plan/Notes toggle */
+    .plan-notes-toggle {
+      padding: 6px 0;
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .plan-notes-toggle:hover {
+      color: var(--color-text-secondary);
+    }
+
+    .plan-notes-content {
+      display: none;
+      margin-top: 6px;
+      padding: 6px;
+      background: var(--color-background-tertiary);
+      border-radius: var(--border-radius-md);
+      font-size: 10px;
+    }
+
+    .plan-notes-content.visible {
+      display: block;
+    }
+
+    .plan-notes-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .plan-notes-text {
+      color: var(--color-text-primary);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    /* Empty state */
+    .empty-message {
+      text-align: center;
+      color: var(--color-text-secondary);
+      padding: 32px 16px;
+    }
+
+    /* Panes */
+    .pane {
+      display: none;
+    }
+
+    .pane.active {
+      display: block;
+    }
+
+    /* Collapsed section */
+    .collapsed-content {
+      display: none;
+    }
+
+    .collapsed-content.visible {
+      display: block;
+    }
+
+    .season-bar {
+      display: flex;
+      gap: 16px;
+      padding: 10px 0 16px;
+      border-bottom: 1px solid var(--color-border-secondary);
+      margin-bottom: 16px;
+    }
+    .season-stat {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-text-secondary);
+    }
+    .season-stat span {
+      color: var(--color-text-primary);
+      font-size: 15px;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    const CONFIG = {
+      notionProxy: 'https://notion-proxy.redsenya1.workers.dev',//'/notion-proxy',
+      logDbId:   '33abbae3-0a19-806d-bd16-d650f16e7e3e',
+      microDbId: '33abbae3-0a19-8007-87ae-dcaa9be41d5b',
+      mesoDbId:  '33abbae3-0a19-80f7-9826-f7ce1aef28b9',
+      maxHr: 193,
+    };
+
+    const state = {
+      activeTab: 'meso',
+      filter: null,
+      calMonth: new Date().getMonth(),
+      calYear:  new Date().getFullYear(),
+      data: null,
+      loading: true,
+      error: null,
+      calVisible: true,
+      logScrollDate: null,
+    };
+
+    // ========== Data parsers ==========
+
+    function parseLogPage(raw) {
+      const p = raw.properties;
+      return {
+        id: raw.id,
+        title: p['Авто-название']?.formula?.string ?? null,
+        date: p['Дата']?.date?.start ?? null,
+        time_of_day: p['Время суток']?.select?.name ?? null,
+        sport_type: p['Тип']?.select?.name ?? null,
+        status: p['Статус']?.select?.name ?? null,
+        distance_km: p['км']?.number ?? null,
+        duration_min: p['мин']?.number ?? null,
+        avg_hr: p['Avg HR']?.number ?? null,
+        max_hr: p['Max HR']?.number ?? null,
+        calories: p['Калории']?.number ?? null,
+        z1: p['Z1 %']?.number ?? null,
+        z2: p['Z2 %']?.number ?? null,
+        z3: p['Z3 %']?.number ?? null,
+        z4: p['Z4 %']?.number ?? null,
+        z5: p['Z5 %']?.number ?? null,
+        rpe: p['RPE']?.number ?? null,
+        source: p['Источник']?.formula?.string ?? null,
+        device: p['Устройство']?.rich_text?.[0]?.plain_text ?? null,
+        strava_id: p['Strava ID']?.number ?? null,
+        plan: p['План']?.rich_text?.[0]?.plain_text ?? null,
+        notes: p['По факту / примечания']?.rich_text?.[0]?.plain_text ?? null,
+        microcycle_ids: p['Микроцикл']?.relation?.map(r => r.id) ?? [],
+        mesocycle_ids: p['Мезоцикл']?.relation?.map(r => r.id) ?? [],
+      };
+    }
+
+    function parseMicroPage(raw) {
+      const p = raw.properties;
+      return {
+        id: raw.id,
+        title: p['Название']?.title?.[0]?.plain_text ?? null,
+        number: p['Номер']?.number ?? null,
+        date_start: p['Дата начала']?.date?.start ?? null,
+        date_end: p['Дата конца']?.date?.start ?? null,
+        cycle_type: p['Тип']?.select?.name ?? null,
+        mesocycle_ids: p['Мезоцикл']?.relation?.map(r => r.id) ?? [],
+        log_ids: p['Журнал']?.relation?.map(r => r.id) ?? [],
+        total_km: p['Объём (км)']?.rollup?.number ?? null,
+        total_min: p['Время (мин)']?.rollup?.number ?? null,
+        total_hours: p['Время (ч)']?.formula?.number ?? null,
+        workout_count: p['Тренировок']?.rollup?.number ?? null,
+        avg_rpe: p['Ср. RPE']?.rollup?.number ?? null,
+        pct_done: p['% выполнено']?.formula?.number ?? null,
+      };
+    }
+
+    function parseMesoPage(raw) {
+      const p = raw.properties;
+      return {
+        id: raw.id,
+        title: p['Название']?.title?.[0]?.plain_text ?? null,
+        stage: p['Этап']?.select?.name ?? null,
+        status: p['Статус']?.select?.name ?? null,
+        date_start: p['Дата начала']?.date?.start ?? null,
+        date_end: p['Дата конца']?.date?.start ?? null,
+        notes: p['Примечания']?.rich_text?.[0]?.plain_text ?? null,
+        microcycle_ids: p['Микроциклы']?.relation?.map(r => r.id) ?? [],
+        total_km: p['Объём (км)']?.rollup?.number ?? null,
+        total_hours: p['Время (ч)']?.formula?.number ?? null,
+        workout_count: p['Тренировок']?.rollup?.number ?? null,
+        avg_rpe: p['Ср. RPE']?.rollup?.number ?? null,
+        pct_done: p['% выполнено']?.rollup?.number ?? null,
+      };
+    }
+
+    // ========== API fetching ==========
+
+    async function fetchAllPages(dbId) {
+      let allPages = [];
+      let cursor = undefined;
+
+      while (true) {
+        const body = {
+          page_size: 100,
+          sorts: [{ property: dbId === CONFIG.logDbId ? 'Дата' : 'Дата начала', direction: 'descending' }],
+        };
+        if (cursor) body.start_cursor = cursor;
+
+        const response = await fetch(`${CONFIG.notionProxy}/databases/${dbId}/query`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Notion API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        allPages = allPages.concat(data.results || []);
+
+        if (!data.has_more) break;
+        cursor = data.next_cursor;
+      }
+
+      return allPages;
+    }
+
+    async function fetchAll() {
+      const [mesoRaw, microRaw, logRaw] = await Promise.all([
+        fetchAllPages(CONFIG.mesoDbId),
+        fetchAllPages(CONFIG.microDbId),
+        fetchAllPages(CONFIG.logDbId),
+      ]);
+
+      return {
+        mesoPages: mesoRaw.map(parseMesoPage),
+        microPages: microRaw.map(parseMicroPage),
+        logPages: logRaw.map(parseLogPage),
+      };
+    }
+
+    // ========== Helper functions ==========
+
+    function getToday() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+
+    function calcPace(sportType, distKm, durMin) {
+      if (!distKm || !durMin) return null;
+      const distM = distKm * 1000;
+      const durSec = durMin * 60;
+
+      if (sportType === 'Swim' || sportType === 'OpenWaterSwim') {
+        const secPer100 = (durSec / distM) * 100;
+        const min = Math.floor(secPer100 / 60);
+        const sec = Math.round(secPer100 % 60).toString().padStart(2, '0');
+        return `${min}:${sec}/100м`;
+      }
+
+      const runTypes = ['Run', 'TrailRun', 'VirtualRun', 'NordicSki', 'RollerSki', 'Walk'];
+      if (runTypes.includes(sportType)) {
+        const secPerKm = (durSec / distM) * 1000;
+        const min = Math.floor(secPerKm / 60);
+        const sec = Math.round(secPerKm % 60).toString().padStart(2, '0');
+   
