@@ -735,6 +735,136 @@
       font-weight: 600;
       margin-right: 4px;
     }
+
+    /* ========== Responsive — smartphones ========== */
+    @media (max-width: 600px) {
+      /* Topbar: stack title + tabs vertically */
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 16px;
+        gap: 10px;
+        min-height: unset;
+      }
+
+      .topbar-tabs {
+        width: 100%;
+        gap: 8px;
+      }
+
+      .tab-button {
+        flex: 1;
+        padding: 7px 4px;
+        font-size: 13px;
+        text-align: center;
+      }
+
+      /* Content: tighter horizontal padding */
+      .content {
+        padding: 14px 12px;
+      }
+
+      /* Stats row: wrap to 2-column grid */
+      .stats-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+
+      .stat-value {
+        font-size: 18px;
+      }
+
+      /* Bar container: shrink label and value columns */
+      .bar-container {
+        grid-template-columns: 28px 1fr 62px;
+        gap: 6px;
+      }
+
+      .bar-label {
+        width: 28px;
+        font-size: 9px;
+      }
+
+      .bar-value {
+        font-size: 9px;
+      }
+
+      /* Calendar: compact cell height, hide entry text, show only dots */
+      .calendar-table td {
+        height: 56px;
+        padding: 4px 3px;
+        font-size: 10px;
+      }
+
+      .calendar-table th {
+        padding: 4px 3px 6px;
+        font-size: 9px;
+      }
+
+      .cal-entry-text {
+        display: none;
+      }
+
+      .cal-entry {
+        gap: 2px;
+        margin-bottom: 1px;
+      }
+
+      .cal-entry-bar {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      .cal-overflow {
+        font-size: 9px;
+      }
+
+      .cal-day-num {
+        font-size: 11px;
+      }
+
+      /* Cards */
+      .card {
+        padding: 12px;
+      }
+
+      /* Workout row: allow title to wrap */
+      .workout-row {
+        flex-wrap: wrap;
+      }
+
+      .workout-metrics {
+        font-size: 9px;
+      }
+
+      /* Season bar: wrap stats */
+      .season-bar {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px 0 12px;
+      }
+
+      /* Scroll-to-top: smaller, higher up */
+      .scroll-top-btn {
+        bottom: 16px;
+        right: 16px;
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+      }
+
+      /* Legend: tighter */
+      .legend {
+        gap: 6px;
+      }
+
+      .legend-item {
+        padding: 5px 8px;
+        font-size: 11px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -742,7 +872,7 @@
 
   <script>
     const CONFIG = {
-      notionProxy: 'https://notion-proxy.redsenya1.workers.dev/notion-proxy',
+      notionProxy: 'https://notion-proxy.redsenya1.workers.dev',//'/notion-proxy',
       logDbId:   '33abbae3-0a19-806d-bd16-d650f16e7e3e',
       microDbId: '33abbae3-0a19-8007-87ae-dcaa9be41d5b',
       mesoDbId:  '33abbae3-0a19-80f7-9826-f7ce1aef28b9',
@@ -903,4 +1033,900 @@
         const secPerKm = (durSec / distM) * 1000;
         const min = Math.floor(secPerKm / 60);
         const sec = Math.round(secPerKm % 60).toString().padStart(2, '0');
-   
+        return `${min}:${sec}/км`;
+      }
+
+      return null;
+    }
+
+    function getColor(sportType) {
+      const swim    = ['Swim', 'OpenWaterSwim', 'Плавание'];
+      const run     = ['Run', 'TrailRun', 'VirtualRun', 'Бег'];
+      const ride    = ['Ride', 'VirtualRide', 'MountainBikeRide', 'GravelRide', 'EBikeRide', 'EMountainBikeRide', 'VirtualRow', 'Rowing', 'Velomobile', 'Handcycle', 'Canoeing', 'Kayaking', 'Вело'];
+      const strength = ['WeightTraining', 'Workout', 'Crossfit', 'HighIntensityIntervalTraining', 'Elliptical', 'StairStepper', 'RockClimbing', 'Pilates', 'Силовая'];
+      const ski     = ['NordicSki', 'RollerSki', 'BackcountrySki', 'AlpineSki', 'Snowboard', 'Snowshoe', 'IceSkate', 'InlineSkate', 'Skateboard', 'Windsurf', 'Kitesurf', 'Surfing', 'StandUpPaddling', 'Sail', 'Лыжи', 'Роллеры'];
+
+      if (swim.includes(sportType))     return 'var(--color-swim)';
+      if (run.includes(sportType))      return 'var(--color-run)';
+      if (ride.includes(sportType))     return 'var(--color-ride)';
+      if (strength.includes(sportType)) return 'var(--color-strength)';
+      if (ski.includes(sportType))      return 'var(--color-ski)';
+      return 'var(--color-recovery)';
+    }
+
+    function shortTitle(title) {
+      if (!title) return title;
+      return title
+        .replace(/^\d{4}-\d{2}-\d{2}\s+/, '')
+        .replace(/^\d{2}\.\d{2}\.\d{4}\s+/, '')
+        .replace(/\s+\d{4}-\d{2}-\d{2}$/, '')
+        .replace(/\s+\d{2}\.\d{2}\.\d{4}$/, '')
+        .replace(/\s*·\s*\d{1,2}\s+[A-Za-z]{3}\s+\d{2,4}$/, '')
+        .trim();
+    }
+
+    function encodeTip(html) {
+      return html.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function pluralTraining(n) {
+      const mod100 = n % 100;
+      const mod10 = n % 10;
+      if (mod100 >= 11 && mod100 <= 14) return `${n} тренировок`;
+      if (mod10 === 1) return `${n} тренировка`;
+      if (mod10 >= 2 && mod10 <= 4) return `${n} тренировки`;
+      return `${n} тренировок`;
+    }
+
+    function toRoman(n) {
+      if (!n || n < 1) return '?';
+      const vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+      const syms = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'];
+      let r = '';
+      vals.forEach((v,i) => { while (n >= v) { r += syms[i]; n -= v; } });
+      return r;
+    }
+
+    function getCycleLabel(cycleType) {
+      const mapping = {
+        'Развивающий': 'разв.',
+        'Поддерживающий': 'поддерж.',
+        'Отдых': 'отдых',
+      };
+      return mapping[cycleType] ?? '';
+    }
+
+    function formatMetrics(entry) {
+      const parts = [];
+
+      if (entry.distance_km != null) {
+        parts.push(`${entry.distance_km.toFixed(1)} км`);
+      }
+      if (entry.duration_min != null) {
+        parts.push(`${entry.duration_min} мин`);
+      } else {
+        parts.push('—');
+      }
+
+      const pace = calcPace(entry.sport_type, entry.distance_km, entry.duration_min);
+      if (pace) parts.push(pace);
+
+      if (entry.avg_hr != null || entry.max_hr != null) {
+        const avgStr = entry.avg_hr != null ? entry.avg_hr : '?';
+        const maxStr = entry.max_hr != null ? entry.max_hr : '?';
+        parts.push(`avg ${avgStr} · max ${maxStr}`);
+      }
+
+      if (entry.calories != null) {
+        parts.push(`${entry.calories} ккал`);
+      }
+
+      return parts.join(' · ');
+    }
+
+    function renderSourceBadge(source) {
+      const classes = {
+        'full': 'full',
+        'device': 'device',
+        'manual': 'manual',
+      };
+      const labels = {
+        'full': 'full',
+        'device': 'device',
+        'manual': 'manual',
+      };
+      const cls = classes[source] || 'manual';
+      const label = labels[source] || source;
+      return `<span class="source-badge ${cls}">${label}</span>`;
+    }
+
+    function renderZoneBar(entry) {
+      const zoneSum = (entry.z1 ?? 0) + (entry.z2 ?? 0) + (entry.z3 ?? 0) + (entry.z4 ?? 0) + (entry.z5 ?? 0);
+      if (zoneSum === 0) return '';
+
+      const zones = [
+        { key: 'z1', label: 'Z1', pct: entry.z1, color: '#9FE1CB' },
+        { key: 'z2', label: 'Z2', pct: entry.z2, color: '#5DCAA5' },
+        { key: 'z3', label: 'Z3', pct: entry.z3, color: '#EF9F27' },
+        { key: 'z4', label: 'Z4', pct: entry.z4, color: '#D85A30' },
+        { key: 'z5', label: 'Z5', pct: entry.z5, color: '#C04040' },
+      ];
+
+      const badgesHtml = zones.map(z =>
+        z.pct != null ? `<span class="zone-badge ${z.key}">${z.label} ${Math.round(z.pct * 100)}%</span>` : ''
+      ).join('');
+
+      const barHtml = zones.map(z => {
+        const pct = (z.pct ?? 0) * 100;
+        if (pct === 0) return '';
+        const zoneMin = (Math.trunc(z.pct * (entry.duration_min || 0) * 100) / 100).toFixed(2);
+        const label = `${z.label} ${Math.round(pct)}% · ${zoneMin} мин`;
+        const tipHtml = `<span style="color:${z.color};font-weight:600;">${label}</span>`;
+        const tipAttr = encodeTip(tipHtml);
+        return `<div class="zone-segment" style="flex:${pct};background:${z.color};cursor:default;"
+          data-tip="${tipAttr}"
+          onmouseenter="showTip(this,this.dataset.tip)"
+          onmouseleave="hideTip()"
+          ontouchstart="showTip(this,this.dataset.tip,true)"></div>`;
+      }).join('');
+
+      return `
+        <div class="zone-bar-container">
+          <div class="zone-badge-row">${badgesHtml}</div>
+          <div class="zone-bar-visual">${barHtml}</div>
+        </div>
+      `;
+    }
+
+    function renderWorkoutRow(entry, compact) {
+      const done = entry.status === 'Выполнено' || entry.source === 'device' || entry.source === 'full';
+      const flagHtml = done ? '<span class="workout-flag done">✓</span>' : '<span class="workout-flag pending">○</span>';
+
+      const deviceStr = entry.source === 'manual' && !entry.device ? 'ручной ввод' : (entry.device || '');
+
+      const metrics = formatMetrics(entry);
+      const datePrefix = compact && entry.date ? `<span style="color:var(--color-text-tertiary);margin-right:4px;">${entry.date.slice(8)}.${entry.date.slice(5,7)}</span>` : '';
+
+      return `
+        <div class="workout-row" data-entry-id="${entry.id}"${compact && entry.date ? ` style="cursor:pointer;" onclick="switchToDay('${entry.date}')"` : ''}>
+          <div class="workout-dot" style="background: ${getColor(entry.sport_type)};"></div>
+          <div class="workout-title">${datePrefix}${shortTitle(entry.title) ?? 'Без названия'}</div>
+          <div class="workout-metrics">${metrics}</div>
+          ${flagHtml}
+          <div class="workout-rpe">${entry.rpe != null ? `RPE ${entry.rpe}` : ''}</div>
+          ${renderSourceBadge(entry.source || 'manual')}
+        </div>
+        ${compact ? '' : `<div style="margin-left: 14px; font-size: 9px; color: var(--color-text-tertiary);">${deviceStr}</div>`}
+        ${renderZoneBar(entry)}
+        ${compact ? '' : `
+        <div class="plan-notes-toggle">↓ план и примечания</div>
+        <div class="plan-notes-content">
+          ${entry.plan ? `<div><div class="plan-notes-label">План</div><div class="plan-notes-text">${entry.plan}</div></div>` : ''}
+          ${entry.notes ? `<div style="margin-top: 6px;"><div class="plan-notes-label">Примечания</div><div class="plan-notes-text">${entry.notes}</div></div>` : ''}
+        </div>`}
+      `;
+    }
+
+    function prevMonth() {
+      if (state.calMonth === 0) { state.calMonth = 11; state.calYear--; }
+      else state.calMonth--;
+      renderApp();
+    }
+    function nextMonth() {
+      if (state.calMonth === 11) { state.calMonth = 0; state.calYear++; }
+      else state.calMonth++;
+      renderApp();
+    }
+
+    function renderCalendar(pane, highlightStart, highlightEnd, logEntries) {
+      const year = state.calYear;
+      const month = state.calMonth;
+      const monthNames = ['янв.','февр.','март','апр.','май','июнь','июль','авг.','сент.','окт.','нояб.','дек.'];
+      const dowFull = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];
+      const today = getToday();
+
+      const firstDay = new Date(year, month, 1);
+      const lastDay  = new Date(year, month + 1, 0);
+      const totalDays = lastDay.getDate();
+
+      // Monday-first offset
+      const offset = (firstDay.getDay() + 6) % 7;
+
+      // Build entries map — include prev/next month days that appear in grid
+      const gridStart = new Date(firstDay);
+      gridStart.setDate(gridStart.getDate() - offset);
+      const totalCells = Math.ceil((offset + totalDays) / 7) * 7;
+      const gridEnd = new Date(gridStart);
+      gridEnd.setDate(gridEnd.getDate() + totalCells - 1);
+
+      const toLocalDateStr = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      const gridStartStr = toLocalDateStr(gridStart);
+      const gridEndStr   = toLocalDateStr(gridEnd);
+
+      const grouped = {};
+
+      logEntries.forEach(entry => {
+        if (entry.date >= gridStartStr && entry.date <= gridEndStr) {
+          if (state.filter && entry.sport_type !== state.filter) return;
+          if (!grouped[entry.date]) grouped[entry.date] = [];
+          grouped[entry.date].push(entry);
+        }
+      });
+
+      let html = `
+    <div class="cal-nav">
+      <span class="cal-year-label">${year}</span>
+      <button onclick="prevMonth()" class="cal-nav-btn">&#8249;</button>
+      <span class="cal-month-label">${monthNames[month]}</span>
+      <button onclick="nextMonth()" class="cal-nav-btn">&#8250;</button>
+    </div>
+    <table class="calendar-table"><thead><tr>
+  `;
+      dowFull.forEach(d => html += `<th>${d}</th>`);
+      html += '</tr></thead><tbody>';
+
+      const cursor = new Date(gridStart);
+      for (let row = 0; row < totalCells / 7; row++) {
+        html += '<tr>';
+        for (let col = 0; col < 7; col++) {
+          const dateStr = `${cursor.getFullYear()}-${String(cursor.getMonth()+1).padStart(2,'0')}-${String(cursor.getDate()).padStart(2,'0')}`;
+          const isCurrentMonth = cursor.getMonth() === month;
+          const isToday = dateStr === today;
+          const inHighlight = highlightStart && highlightEnd && dateStr >= highlightStart && dateStr <= highlightEnd;
+          const dayEntries = grouped[dateStr] || [];
+
+          let tdClass = '';
+          if (inHighlight && isCurrentMonth) tdClass += ' in-highlight';
+          if (isToday) tdClass += ' is-today';
+
+          const dayNumClass = ['cal-day-num', isToday ? 'today' : '', !isCurrentMonth ? 'other-month' : ''].filter(Boolean).join(' ');
+
+          // Activity rows — up to 3, then overflow
+          let entriesHtml = '';
+          const shown = dayEntries.slice(0, 3);
+          shown.forEach(e => {
+            const color = getColor(e.sport_type);
+            const label = shortTitle(e.title) || e.sport_type || '—';
+            entriesHtml += `
+          <div class="cal-entry" onclick="switchToDay('${dateStr}')">
+            <div class="cal-entry-bar" style="background:${color};"></div>
+            <span class="cal-entry-text">${label}</span>
+          </div>`;
+          });
+          if (dayEntries.length > 3) {
+            entriesHtml += `<div class="cal-overflow">и ещё ${dayEntries.length - 3}</div>`;
+          }
+
+          html += `<td class="${tdClass.trim()}">
+        <div class="${dayNumClass}">${cursor.getDate()}</div>
+        ${entriesHtml}
+      </td>`;
+
+          cursor.setDate(cursor.getDate() + 1);
+        }
+        html += '</tr>';
+      }
+
+      html += '</tbody></table>';
+      return html;
+    }
+
+    function renderMesoCard(meso, microPages, logEntries) {
+      const titleNum = meso.title ? (meso.title.match(/\d+/) || [])[0] : null;
+      const index = titleNum ? parseInt(titleNum, 10) : null;
+      const mesoMicros = microPages.filter(m => m.mesocycle_ids.includes(meso.id)).sort((a, b) => (a.date_start || '').localeCompare(b.date_start || ''));
+      const mesoLogs = logEntries.filter(l => l.mesocycle_ids.includes(meso.id));
+      const effectiveDateEnd = meso.date_end || (mesoMicros.length > 0 ? mesoMicros[mesoMicros.length - 1].date_end : null) || '—';
+
+      const stageLabel = meso.stage || '—';
+      const metrics = [
+        { val: meso.total_km != null ? meso.total_km.toFixed(1) : '—', label: 'км' },
+        { val: meso.total_hours != null ? meso.total_hours.toFixed(1) : '—', label: 'ч' },
+        { val: meso.workout_count != null ? Math.round(meso.workout_count) : '—', label: 'трен.' },
+        { val: meso.avg_rpe != null ? meso.avg_rpe.toFixed(1) : '—', label: 'RPE' },
+        { val: meso.pct_done != null ? `${Math.round(meso.pct_done * 100)}%` : '—', label: 'вып.' },
+        { val: mesoMicros.length, label: 'микроциклов' },
+      ];
+
+      let html = `
+        <div class="card">
+          <div class="card-header">
+            <span>${index != null ? toRoman(index) + ' · ' : ''}${meso.title || stageLabel}</span>
+            <span class="badge ${meso.status === 'Активный' ? 'badge-status-active' : meso.status === 'Завершён' ? 'badge-status-done' : 'badge-status-planned'}">${meso.status || '—'}</span>
+          </div>
+          <div class="card-subheader">${meso.date_start || '—'} – ${effectiveDateEnd}</div>
+          <div class="stats-row">
+            ${metrics.map(m => `<div class="stat"><div class="stat-value">${m.val}</div><div class="stat-label">${m.label}</div></div>`).join('')}
+          </div>
+      `;
+
+      mesoMicros.forEach(micro => {
+        const microLogs = logEntries.filter(l => l.microcycle_ids.includes(micro.id));
+        const barLabel = toRoman(micro.number);
+
+        let barHtml = '';
+        if (microLogs.length === 0) {
+          barHtml = `<div class="bar empty" style="width: 100%; background: var(--color-recovery);"></div>`;
+        } else {
+          const totalMin = microLogs.reduce((sum, l) => sum + (l.duration_min || 0), 0);
+          microLogs.forEach(log => {
+            const pct = totalMin > 0 ? (log.duration_min || 0) / totalMin * 100 : 0;
+            const color = getColor(log.sport_type);
+            const km = log.distance_km != null ? ` · ${log.distance_km.toFixed(1)} км` : '';
+            const min = log.duration_min != null ? ` · ${log.duration_min} мин` : '';
+            const tip = encodeTip(`<span style="color:${color};font-weight:600;">${log.sport_type}</span>${km}${min}`);
+            barHtml += `<div class="bar" style="width:${pct}%;background:${color};" data-tip="${tip}" onmouseenter="showTip(this,this.dataset.tip)" onmouseleave="hideTip()" ontouchstart="showTip(this,this.dataset.tip,true)"></div>`;
+          });
+        }
+
+        const barValue = `${micro.total_km != null ? micro.total_km.toFixed(1) : '—'} км · ${micro.total_hours != null ? micro.total_hours.toFixed(1) : '—'} ч`;
+
+        html += `
+          <div class="bar-container">
+            <div class="bar-label">${barLabel}</div>
+            <div class="bar-wrapper">${barHtml}</div>
+            <div class="bar-value">${barValue}</div>
+          </div>
+        `;
+      });
+
+      html += '</div>';
+      return html;
+    }
+
+    function renderMicroCard(micro, logEntries) {
+      const microLogs = logEntries.filter(l => l.microcycle_ids.includes(micro.id)).sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+      const label = micro.title || `Микро ${micro.number}`;
+      const cycleLabel = getCycleLabel(micro.cycle_type);
+      const today = getToday();
+      const isCurrent = micro.date_start <= today && today <= micro.date_end;
+      const isPast = micro.date_end < today;
+      const microStatusBadge = isCurrent
+        ? '<span class="badge badge-status-active">текущий</span>'
+        : isPast
+          ? '<span class="badge badge-status-done">завершён</span>'
+          : '<span class="badge badge-status-planned">запланирован</span>';
+
+      const metrics = [
+        { val: micro.total_km != null ? micro.total_km.toFixed(1) : '—', label: 'км' },
+        { val: micro.total_hours != null ? micro.total_hours.toFixed(1) : '—', label: 'ч' },
+        { val: micro.workout_count != null ? Math.round(micro.workout_count) : '—', label: 'трен.' },
+        { val: micro.avg_rpe != null ? micro.avg_rpe.toFixed(1) : '—', label: 'RPE' },
+        { val: micro.pct_done != null ? `${Math.round(micro.pct_done * 100)}%` : '—', label: 'вып.' },
+      ];
+
+      let html = `
+        <div class="card">
+          <div class="card-header">
+            <span>${label}${cycleLabel ? ' ' + cycleLabel : ''}</span>
+            ${microStatusBadge}
+          </div>
+          <div class="card-subheader">${micro.date_start || '—'} – ${micro.date_end || '—'}</div>
+          <div class="stats-row">
+            ${metrics.map(m => `<div class="stat"><div class="stat-value">${m.val}</div><div class="stat-label">${m.label}</div></div>`).join('')}
+          </div>
+      `;
+
+      // Day bars
+      const days = [];
+      let current = new Date(micro.date_start);
+      const end = new Date(micro.date_end);
+      while (current <= end) {
+        days.push(new Date(current));
+        current.setDate(current.getDate() + 1);
+      }
+
+      const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+      const grouped = {};
+      microLogs.forEach(log => {
+        if (!grouped[log.date]) grouped[log.date] = [];
+        grouped[log.date].push(log);
+      });
+
+      days.forEach(day => {
+        const dateStr = day.toISOString().split('T')[0];
+        const dayOfWeek = dayNames[day.getDay() === 0 ? 6 : day.getDay() - 1];
+        const dayNum = day.getDate();
+        const dayLogs = grouped[dateStr] || [];
+
+        const barLabel = `${dayOfWeek} ${dayNum}`;
+        let barHtml = '';
+        if (dayLogs.length === 0) {
+          barHtml = `<div class="rest-bar"></div>`;
+        } else {
+          const totalMin = dayLogs.reduce((sum, l) => sum + (l.duration_min || 0), 0);
+          dayLogs.forEach(log => {
+            const pct = totalMin > 0 ? (log.duration_min || 0) / totalMin * 100 : 0;
+            const color = getColor(log.sport_type);
+            const title = shortTitle(log.title) || log.sport_type;
+            const km = log.distance_km != null ? ` · ${log.distance_km.toFixed(1)} км` : '';
+            const min = log.duration_min != null ? ` · ${log.duration_min} мин` : '';
+            const tip = encodeTip(`<span style="color:${color};font-weight:600;">${title}</span>${km}${min}`);
+            barHtml += `<div class="bar" style="width:${pct}%;background:${color};" data-tip="${tip}" onmouseenter="showTip(this,this.dataset.tip)" onmouseleave="hideTip()" ontouchstart="showTip(this,this.dataset.tip,true)"></div>`;
+          });
+        }
+
+        const totalMinDay = dayLogs.reduce((s, l) => s + (l.duration_min || 0), 0);
+        const barValue = dayLogs.length > 0
+          ? `${dayLogs.reduce((s, l) => s + (l.distance_km || 0), 0).toFixed(1)} км · ${(totalMinDay / 60).toFixed(1)} ч`
+          : '';
+
+        html += `
+          <div class="bar-container">
+            <div class="bar-label">${barLabel}</div>
+            <div class="bar-wrapper">${dayLogs.length === 0 ? barHtml : `<div style="display: flex; height: 100%; border-radius: 3px; overflow: hidden;">${barHtml}</div>`}</div>
+            <div class="bar-value">${barValue}</div>
+          </div>
+        `;
+      });
+
+      html += '<div class="divider"></div>';
+
+      // Workout list
+      if (microLogs.length === 0) {
+        html += '<div style="color: var(--color-text-secondary); font-size: 11px;">Нет тренировок</div>';
+      } else {
+        microLogs.forEach(log => {
+          html += renderWorkoutRow(log, true);
+        });
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    function renderDayCard(dateStr, dayLogs, microPages, mesoPages) {
+      const today = getToday();
+      const isToday = dateStr === today;
+
+      const dayObj = new Date(dateStr + 'T00:00:00');
+      const dayNames = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+      const dayName = dayNames[dayObj.getDay()];
+      const dayNum = dayObj.getDate();
+
+      const relatedMicros = microPages.filter(m => m.log_ids.some(id => dayLogs.map(l => l.id).includes(id)));
+      const relatedMesos = mesoPages.filter(m => m.microcycle_ids.some(mid => relatedMicros.map(m => m.id).includes(mid)));
+
+      const totalKm = dayLogs.reduce((s, l) => s + (l.distance_km || 0), 0);
+      const totalMin = dayLogs.reduce((s, l) => s + (l.duration_min || 0), 0);
+
+      const mesoStr = relatedMesos.length > 0 ? relatedMesos[0].title : '—';
+      const microStr = relatedMicros.length > 0 ? toRoman(relatedMicros[0].number) : '—';
+
+      const dayMetrics = [
+        { val: totalKm.toFixed(1), label: 'км' },
+        { val: (totalMin / 60).toFixed(1), label: 'ч' },
+        { val: dayLogs.length, label: 'трен.' },
+        { val: mesoStr, label: 'мезо' },
+        { val: microStr, label: 'микро' },
+      ];
+
+      let html = `
+        <div class="card" id="day-${dateStr}">
+          <div class="card-header">
+            <span>${dayName} ${dayNum} ${dateStr}</span>
+            ${isToday ? '<span class="badge badge-current">сегодня</span>' : ''}
+          </div>
+          <div class="stats-row">
+            ${dayMetrics.map(m => `<div class="stat"><div class="stat-value">${m.val}</div><div class="stat-label">${m.label}</div></div>`).join('')}
+          </div>
+          <div class="divider"></div>
+      `;
+
+      if (dayLogs.length === 0) {
+        html += '<div style="color: var(--color-text-secondary); font-size: 11px;">Нет тренировок</div>';
+      } else {
+        dayLogs.forEach(log => {
+          html += renderWorkoutRow(log);
+        });
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    // ========== Render functions ==========
+
+    function renderLoading() {
+      return `
+        <div style="display:flex; align-items:center; justify-content:center; height:100vh;
+                    font-family:var(--font-sans); color:var(--color-text-secondary); font-size:14px;">
+          Загрузка...
+        </div>
+      `;
+    }
+
+    function renderError(err) {
+      return `
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh;
+                    font-family:var(--font-sans); color:var(--color-text-secondary); font-size:14px; padding:16px;">
+          Не удалось загрузить данные. Проверь, запущен ли serve.py и настроен ли NOTION_TOKEN.
+          <pre style="font-size:11px; color:var(--color-text-tertiary); margin-top:12px; white-space:pre-wrap;">${err.message}</pre>
+        </div>
+      `;
+    }
+
+    function renderTopbar() {
+      return `
+        <div class="topbar">
+          <div class="topbar-title">
+            <div class="topbar-main">Тренировочный журнал</div>
+            <div class="topbar-sub">Сезон 2025–2026</div>
+          </div>
+          <div class="topbar-tabs">
+            <button class="tab-button ${state.activeTab === 'meso' ? 'active' : ''}" onclick="toggleTab('meso')">Мезоциклы</button>
+            <button class="tab-button ${state.activeTab === 'micro' ? 'active' : ''}" onclick="toggleTab('micro')">Микроцикл</button>
+            <button class="tab-button ${state.activeTab === 'log' ? 'active' : ''}" onclick="toggleTab('log')">Журнал</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderMeso(data) {
+      const today = getToday();
+      const mesos = data.mesoPages.filter(m => state.filter === null || data.logPages.filter(l => l.mesocycle_ids.includes(m.id) && l.sport_type === state.filter).length > 0);
+
+      const past = mesos.filter(m => m.status === 'Завершён');
+      const current = mesos.filter(m => m.status === 'Активный');
+      const future = mesos.filter(m => m.status === 'Запланирован');
+
+      past.sort((a, b) => (a.date_start || '').localeCompare(b.date_start || ''));
+      future.sort((a, b) => (a.date_start || '').localeCompare(b.date_start || ''));
+
+      let html = '';
+
+      if (past.length > 0) {
+        html += `
+          <button class="collapse-button" onclick="toggleCollapse(this)">
+            <span>↑ Завершённые · ${past.length}   ↑ показать</span>
+          </button>
+          <div class="collapsed-content">
+        `;
+        past.forEach(m => html += renderMesoCard(m, data.microPages, data.logPages));
+        html += '</div>';
+      }
+
+      if (current.length === 0 && past.length === 0 && future.length === 0) {
+        html += '<div class="empty-message">Нет мезоциклов</div>';
+      } else {
+        if (current.length > 0) {
+          current.forEach(m => html += renderMesoCard(m, data.microPages, data.logPages));
+        }
+      }
+
+      if (future.length > 0) {
+        html += `
+          <button class="collapse-button" onclick="toggleCollapse(this)">
+            <span>↓ Запланированные · ${future.length}   ↓ показать</span>
+          </button>
+          <div class="collapsed-content">
+        `;
+        future.forEach(m => html += renderMesoCard(m, data.microPages, data.logPages));
+        html += '</div>';
+      }
+
+      return html;
+    }
+
+    function renderMicro(data) {
+      const today = getToday();
+      const micros = data.microPages.filter(m => state.filter === null || data.logPages.filter(l => l.microcycle_ids.includes(m.id) && l.sport_type === state.filter).length > 0);
+
+      const past = micros.filter(m => m.date_end < today);
+      const current = micros.filter(m => m.date_start <= today && today <= m.date_end);
+      const future = micros.filter(m => m.date_start > today);
+
+      past.sort((a, b) => (a.date_end || '').localeCompare(b.date_end || ''));
+      future.sort((a, b) => (a.date_start || '').localeCompare(b.date_start || ''));
+
+      let html = '';
+
+      if (past.length > 0) {
+        html += `
+          <button class="collapse-button" onclick="toggleCollapse(this)">
+            <span>↑ Предыдущие · ${past.length}   ↑ показать</span>
+          </button>
+          <div class="collapsed-content">
+        `;
+        past.forEach(m => html += renderMicroCard(m, data.logPages));
+        html += '</div>';
+      }
+
+      if (current.length === 0 && past.length === 0 && future.length === 0) {
+        html += '<div class="empty-message">Нет микроциклов</div>';
+      } else {
+        if (current.length > 0) {
+          current.forEach(m => html += renderMicroCard(m, data.logPages));
+        }
+      }
+
+      if (future.length > 0) {
+        html += `
+          <button class="collapse-button" onclick="toggleCollapse(this)">
+            <span>↓ Следующие · ${future.length}   ↓ показать</span>
+          </button>
+          <div class="collapsed-content">
+        `;
+        future.forEach(m => html += renderMicroCard(m, data.logPages));
+        html += '</div>';
+      }
+
+      return html;
+    }
+
+    function renderLog(data) {
+      const today = getToday();
+      const logs = data.logPages.filter(l => state.filter === null || l.sport_type === state.filter);
+
+      const past = logs.filter(l => l.date < today);
+      const current = logs.filter(l => l.date === today);
+      const future = logs.filter(l => l.date > today);
+
+      let html = '';
+
+      if (past.length > 0) {
+        const pastByDate = {};
+        past.forEach(l => {
+          if (!pastByDate[l.date]) pastByDate[l.date] = [];
+          pastByDate[l.date].push(l);
+        });
+        const pastDates = Object.keys(pastByDate).sort();
+        const expandPast = state.logScrollDate && pastDates.includes(state.logScrollDate);
+        html += `
+          <button class="collapse-button" onclick="toggleCollapse(this)">
+            <span>↑ Предыдущие дни · ${past.length}   ↑ ${expandPast ? 'скрыть' : 'показать'}</span>
+          </button>
+          <div class="collapsed-content${expandPast ? ' visible' : ''}">
+        `;
+        pastDates.forEach(date => {
+          html += renderDayCard(date, pastByDate[date], data.microPages, data.mesoPages);
+        });
+        html += '</div>';
+      }
+
+      if (current.length > 0) {
+        html += renderDayCard(today, current, data.microPages, data.mesoPages);
+      } else if (past.length === 0 && future.length === 0) {
+        html += '<div class="empty-message">Нет записей</div>';
+      }
+
+      if (future.length > 0) {
+        const futureByDate = {};
+        future.forEach(l => {
+          if (!futureByDate[l.date]) futureByDate[l.date] = [];
+          futureByDate[l.date].push(l);
+        });
+        const futureDates = Object.keys(futureByDate).sort();
+        const expandFuture = state.logScrollDate && futureDates.includes(state.logScrollDate);
+        html += `
+          <button class="collapse-button" onclick="toggleCollapse(this)">
+            <span>↓ Следующие дни · ${future.length}   ↓ ${expandFuture ? 'скрыть' : 'показать'}</span>
+          </button>
+          <div class="collapsed-content${expandFuture ? ' visible' : ''}">
+        `;
+        futureDates.forEach(date => {
+          html += renderDayCard(date, futureByDate[date], data.microPages, data.mesoPages);
+        });
+        html += '</div>';
+      }
+
+      return html;
+    }
+
+    function renderSeasonSummary(data) {
+      const logs = data.logPages;
+      const totalTrainings = logs.length;
+      const totalHours = logs.reduce((s, l) => s + (l.duration_min || 0), 0) / 60;
+      const totalKm = logs.reduce((s, l) => s + (l.distance_km || 0), 0);
+      const activeDays = new Set(logs.map(l => l.date).filter(Boolean)).size;
+      return `
+        <div class="season-bar">
+          <div class="season-stat"><span>${totalTrainings}</span>тренировок</div>
+          <div class="season-stat"><span>${totalHours.toFixed(1)}</span>ч</div>
+          <div class="season-stat"><span>${totalKm.toFixed(0)}</span>км</div>
+          <div class="season-stat"><span>${activeDays}</span>дней</div>
+        </div>
+      `;
+    }
+
+    function renderLegend() {
+      if (!state.data) return '';
+      const seen = new Set();
+      state.data.logPages.forEach(l => { if (l.sport_type) seen.add(l.sport_type); });
+      const types = Array.from(seen).sort();
+
+      let html = '<div class="legend">';
+      types.forEach(type => {
+        const isActive = state.filter === type;
+        html += `
+          <div class="legend-item ${isActive ? 'active' : ''}" onclick="filterByType('${type}')">
+            <div class="legend-dot" style="background: ${getColor(type)};"></div>
+            <span>${type}</span>
+          </div>
+        `;
+      });
+      html += '</div>';
+      return html;
+    }
+
+    function renderApp() {
+      const appEl = document.getElementById('app');
+
+      if (state.loading) {
+        appEl.innerHTML = renderLoading();
+        return;
+      }
+
+      if (state.error) {
+        appEl.innerHTML = renderError(state.error);
+        return;
+      }
+
+      const { mesoPages, microPages, logPages } = state.data;
+
+      let html = renderTopbar();
+      html += '<div class="content">';
+
+      // Calendar toggle (shared across all tabs)
+      const activeTab = state.activeTab;
+      let calStartDate, calEndDate;
+
+      if (activeTab === 'meso') {
+        const currentMeso = mesoPages.find(m => m.status === 'Активный');
+        if (currentMeso) {
+          calStartDate = currentMeso.date_start;
+          calEndDate = currentMeso.date_end;
+        } else {
+          const firstMeso = mesoPages[0];
+          calStartDate = firstMeso?.date_start || getToday();
+          calEndDate = firstMeso?.date_end || getToday();
+        }
+      } else if (activeTab === 'micro') {
+        const today = getToday();
+        const currentMicro = microPages.find(m => m.date_start <= today && today <= m.date_end);
+        if (currentMicro) {
+          calStartDate = currentMicro.date_start;
+          calEndDate = currentMicro.date_end;
+        } else {
+          calStartDate = getToday();
+          const endDate = new Date(calStartDate);
+          endDate.setDate(endDate.getDate() + 6);
+          calEndDate = endDate.toISOString().split('T')[0];
+        }
+      } else {
+        const today = getToday();
+        calStartDate = today;
+        calEndDate = today;
+      }
+
+      html += `
+  <div style="display:flex; justify-content:flex-end; margin-bottom:4px;">
+    <button class="cal-icon-btn" onclick="toggleCal()" title="Календарь">📅</button>
+  </div>
+  <div class="calendar-grid ${state.calVisible ? 'visible' : ''}" id="cal-active">
+    ${renderCalendar(activeTab, calStartDate, calEndDate, logPages)}
+  </div>
+`;
+
+      html += renderLegend();
+
+      if (activeTab === 'meso') {
+        html += renderMeso(state.data);
+      } else if (activeTab === 'micro') {
+        html += renderMicro(state.data);
+      } else {
+        html += renderLog(state.data);
+      }
+
+      html += '</div>';
+      appEl.innerHTML = html;
+
+      // Attach event listeners
+      document.querySelectorAll('.plan-notes-toggle').forEach(el => {
+        el.addEventListener('click', function() {
+          const content = this.nextElementSibling;
+          content.classList.toggle('visible');
+          this.textContent = content.classList.contains('visible') ? '↑ скрыть' : '↓ план и примечания';
+        });
+      });
+    }
+
+    // ========== Event handlers ==========
+
+    function toggleTab(tabName) {
+      state.activeTab = tabName;
+      renderApp();
+    }
+
+    function toggleCal() {
+      state.calVisible = !state.calVisible;
+      renderApp();
+    }
+
+    function toggleCollapse(btnEl) {
+      const content = btnEl.nextElementSibling;
+      if (content && content.classList.contains('collapsed-content')) {
+        content.classList.toggle('visible');
+        const text = btnEl.querySelector('span');
+        if (text) {
+          const isVisible = content.classList.contains('visible');
+          const arrow = text.textContent[0];
+          const label = text.textContent.split(' ').slice(1, -1).join(' ');
+          const action = isVisible ? 'скрыть' : 'показать';
+          text.textContent = `${arrow} ${label}   ${arrow} ${action}`;
+        }
+      }
+    }
+
+    function hideTip() {
+      const existing = document.getElementById('tooltip');
+      if (existing) existing.remove();
+    }
+
+    function showTip(targetEl, htmlContent, autoHide) {
+      hideTip();
+      const tooltip = document.createElement('div');
+      tooltip.id = 'tooltip';
+      tooltip.className = 'tooltip';
+      tooltip.innerHTML = htmlContent;
+      document.body.appendChild(tooltip);
+      const rect = targetEl.getBoundingClientRect();
+      tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + 'px';
+      tooltip.style.top = (rect.top - tooltip.offsetHeight - 8) + 'px';
+      if (autoHide) setTimeout(hideTip, 2200);
+    }
+
+    function filterByType(sportType) {
+      if (state.filter === sportType) {
+        state.filter = null;
+      } else {
+        state.filter = sportType;
+      }
+      renderApp();
+    }
+
+    function switchToDay(dateStr) {
+      state.activeTab = 'log';
+      state.logScrollDate = dateStr;
+      renderApp();
+      const el = document.getElementById(`day-${dateStr}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      state.logScrollDate = null;
+    }
+
+    async function init() {
+      state.loading = true;
+      renderApp();
+      try {
+        state.data = await fetchAll();
+        state.loading = false;
+      } catch (err) {
+        console.error('[init] fetchAll failed:', err);
+        state.error = err;
+        state.loading = false;
+        document.getElementById('app').innerHTML = `<div style="color:#EF9F27;padding:24px;font-family:monospace;font-size:12px;white-space:pre-wrap;background:#1A1B1E;">FETCH ERROR:\n${err.stack || err.message}</div>`;
+        return;
+      }
+      try {
+        renderApp();
+      } catch (renderErr) {
+        console.error('[init] renderApp failed:', renderErr);
+        document.getElementById('app').innerHTML = `<div style="color:#EF9F27;padding:24px;font-family:monospace;font-size:12px;white-space:pre-wrap;background:#1A1B1E;">RENDER ERROR:\n${renderErr.stack || renderErr.message}</div>`;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('scroll-top-btn');
+      window.addEventListener('scroll', function() {
+        btn.classList.toggle('visible', window.scrollY > 300);
+      }, { passive: true });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+  <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Наверх">↑</button>
+</body>
+</html>
