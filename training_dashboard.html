@@ -904,6 +904,7 @@
         status: p['Статус']?.select?.name ?? null,
         distance_km: p['км']?.number ?? null,
         duration_min: p['мин']?.number ?? null,
+        active_time_min: p['мин (акт)']?.number ?? null,
         avg_hr: p['Avg HR']?.number ?? null,
         max_hr: p['Max HR']?.number ?? null,
         calories: p['Калории']?.number ?? null,
@@ -1016,17 +1017,20 @@
       return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
     }
 
-    function calcPace(sportType, distKm, durMin) {
+    function calcPace(sportType, distKm, durMin, activeTimeMin) {
       if (!distKm || !durMin) return null;
       const distM = distKm * 1000;
-      const durSec = durMin * 60;
 
       if (sportType === 'Swim' || sportType === 'OpenWaterSwim') {
-        const secPer100 = (durSec / distM) * 100;
+        // Use active lap time for pace if available; fall back to total session time
+        const paceSec = (activeTimeMin ?? durMin) * 60;
+        const secPer100 = (paceSec / distM) * 100;
         const min = Math.floor(secPer100 / 60);
         const sec = Math.round(secPer100 % 60).toString().padStart(2, '0');
         return `${min}:${sec}/100м`;
       }
+
+      const durSec = durMin * 60;
 
       const runTypes = ['Run', 'TrailRun', 'VirtualRun', 'NordicSki', 'RollerSki', 'Walk'];
       if (runTypes.includes(sportType)) {
@@ -1108,7 +1112,7 @@
         parts.push('—');
       }
 
-      const pace = calcPace(entry.sport_type, entry.distance_km, entry.duration_min);
+      const pace = calcPace(entry.sport_type, entry.distance_km, entry.duration_min, entry.active_time_min);
       if (pace) parts.push(pace);
 
       if (entry.avg_hr != null || entry.max_hr != null) {
@@ -1349,12 +1353,20 @@
           barHtml = `<div class="bar empty" style="width: 100%; background: var(--color-recovery);"></div>`;
         } else {
           const totalMin = microLogs.reduce((sum, l) => sum + (l.duration_min || 0), 0);
+          // Group by sport type: one bar segment per sport
+          const bySport = {};
           microLogs.forEach(log => {
-            const pct = totalMin > 0 ? (log.duration_min || 0) / totalMin * 100 : 0;
-            const color = getColor(log.sport_type);
-            const km = log.distance_km != null ? ` · ${log.distance_km.toFixed(1)} км` : '';
-            const min = log.duration_min != null ? ` · ${log.duration_min} мин` : '';
-            const tip = encodeTip(`<span style="color:${color};font-weight:600;">${log.sport_type}</span>${km}${min}`);
+            const key = log.sport_type || '—';
+            if (!bySport[key]) bySport[key] = { sport_type: key, duration_min: 0, distance_km: 0 };
+            bySport[key].duration_min += log.duration_min || 0;
+            bySport[key].distance_km += log.distance_km || 0;
+          });
+          Object.values(bySport).forEach(group => {
+            const pct = totalMin > 0 ? group.duration_min / totalMin * 100 : 0;
+            const color = getColor(group.sport_type);
+            const km = group.distance_km > 0 ? ` · ${group.distance_km.toFixed(1)} км` : '';
+            const min = group.duration_min > 0 ? ` · ${Math.round(group.duration_min)} мин` : '';
+            const tip = encodeTip(`<span style="color:${color};font-weight:600;">${group.sport_type}</span>${km}${min}`);
             barHtml += `<div class="bar" style="width:${pct}%;background:${color};" data-tip="${tip}" onmouseenter="showTip(this,this.dataset.tip)" onmouseleave="hideTip()" ontouchstart="showTip(this,this.dataset.tip,true)"></div>`;
           });
         }
